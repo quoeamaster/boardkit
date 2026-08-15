@@ -16,6 +16,15 @@ const router = createRouter({
       path: '/tailwind-css-test',
       component: () => import('@/views/TailwindCSSTest.vue'),
     },
+    {
+      path: '/themes-demo',
+      component: () => import('@/views/ThemesDemo.vue'),
+    },
+    {
+      path: '/components-demo',
+      component: () => import('@/views/ComponentsDemo.vue'),
+    },
+
     // {
     //   path: '/components',
     //   component: () => import('@/views/ComponentsView.vue'),

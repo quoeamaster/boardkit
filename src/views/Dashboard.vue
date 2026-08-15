@@ -1,13 +1,39 @@
 <script setup lang="ts">
-import { useThemeStore } from '@/stores/theme';
+import { componentRegistry } from '@/registry/component-registry'
 
-// [lesson] get the store instance
-const themeStore = useThemeStore();
+// [lesson] at this moment, the component to be render is hard-coded...
+const BarChart = componentRegistry.barchart.component
+
+const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
+const values = [120, 180, 150, 230, 190, 260]
 </script>
 
 <template>
-    <div class="text-2xl font-bold">Dashboard</div>
-    <div class="italic">Current theme: {{ themeStore.current }}</div>
-    <button class="button button-primary" @click="themeStore.setTheme('default')">Default</button>&nbsp;
-    <button class="button button-secondary" @click="themeStore.setTheme('dark')">Dark</button>
+  <div class="space-y-6">
+    <div>
+      <h1 class="text-2xl font-semibold">
+        Dashboard
+      </h1>
+
+      <p class="text-gray-500">
+        BoardKit component demonstration
+      </p>
+    </div>
+
+    <div class="rounded-lg border p-6">
+      <!-- [lesson] the component is rendered dynamically based on the type (MAGIC here) -->
+      <component
+        :is="BarChart"
+        :labels="labels"
+        :values="values"
+        title="Monthly Revenue"
+      />
+    </div>
+  </div>
 </template>
+
+<!--
+[todo]
+- load a json file dynamically (layout.json)
+- based on the json definition, render the components 1 by 1...
+-->

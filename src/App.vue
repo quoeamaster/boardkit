@@ -2,29 +2,44 @@
 </script>
 
 <template>
-  <nav class="border-b px-4 py-3">
-    <div class="flex gap-4">
-      <RouterLink to="/dashboard">
-        Dashboard
-      </RouterLink>
+  <!-- [lesson] the root div controls the theme NOW -->
+  <div class="min-h-screen"
+    style="
+      background: var(--bk-color-background); 
+      color: var(--bk-color-text); ">
 
-      <RouterLink to="/tailwind-css-test">
-        Tailwind CSS Test
-      </RouterLink>
+    <nav class="border-b px-4 py-3">
+      <div class="flex gap-4">
+        <RouterLink to="/dashboard">
+          Dashboard
+        </RouterLink>
 
-      <!-- RouterLink to="/components">
-        Components
-      </RouterLink>
+        <RouterLink to="/themes-demo">
+          Themes Demo
+        </RouterLink>
 
-      <RouterLink to="/themes">
-        Themes
-      </RouterLink -->
+        <RouterLink to="/components-demo">
+          Components Demo
+        </RouterLink>
 
-    </div>
-  </nav>
+        <!-- RouterLink to="/tailwind-css-test">
+          Tailwind CSS Test
+        </RouterLink>
 
-  <main class="p-6">
-    <!-- [lesson] the view to be rendered based on the router's current path -->
-    <RouterView />
-  </main>
+        <RouterLink to="/components">
+          Components
+        </RouterLink>
+
+        <RouterLink to="/themes">
+          Themes
+        </RouterLink -->
+
+      </div>
+    </nav>
+
+    <main class="p-6">
+      <!-- [lesson] the view to be rendered based on the router's current path -->
+      <RouterView />
+    </main>
+  </div>
 </template>

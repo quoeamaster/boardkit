@@ -1,0 +1,16 @@
+:root,
+:root[data-theme="default"] {
+    --bk-color-primary: #2563eb;
+    --bk-color-background: #ffffff;
+    --bk-color-surface: #f8fafc;
+    --bk-color-text: #0f172a;
+    --bk-color-border: #e2e8f0;
+  
+    --bk-radius-sm: 4px;
+    --bk-radius-md: 6px;
+    --bk-radius-lg: 8px;
+  
+    --bk-font-size-sm: 0.875rem;
+    --bk-font-size-md: 1rem;
+    --bk-font-size-lg: 1.125rem;
+  }
