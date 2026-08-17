@@ -1,6 +1,7 @@
 // import BoardButton from '@/components/board/BoardButton.vue'
 // import BoardCombo from '@/components/board/BoardCombo.vue'
 import BoardBarChart from '@/components/board/BoardBarChart.vue'
+import BoardButton from '@/components/board/BoardButton.vue'
 
 import type { BoardComponentDefinition } from './types'
 
@@ -8,12 +9,12 @@ export const componentRegistry: Record<
   string,
   BoardComponentDefinition
 > = {
-//   button: {
-//     type: 'button',
-//     name: 'Button',
-//     component: BoardButton,
-//     description: 'Standard BoardKit button',
-//   },
+  button: {
+    type: 'button',
+    name: 'Button',
+    component: BoardButton,
+    description: 'Standard BoardKit button',
+  },
 
 //   combo: {
 //     type: 'combo',
@@ -26,7 +27,8 @@ export const componentRegistry: Record<
     type: 'barchart',
     name: 'Bar Chart',
     component: BoardBarChart,
-    description: 'ECharts bar chart',
+    // original description: 'ECharts bar chart'
+    description: 'charts - bar chart',
   },
 }
 

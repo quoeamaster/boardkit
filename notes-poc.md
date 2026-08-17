@@ -1,6 +1,6 @@
 # [ brainstorming notes ]
 
-## suggested layout
+## (done) suggested layout
 ```bash
 boardkit/
 │
@@ -69,11 +69,14 @@ attributes:
   fontSize: 12
 ```
 
-component registry:
+(done) component registry:
 ```json5
 {
   type: 'barchart',
   component: BoardBarChart,
   attributes: ...
-}
 ```
+}
+
+-=-=-=-=-=-
+

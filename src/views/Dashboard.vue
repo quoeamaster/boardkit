@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { componentRegistry } from '@/registry/component-registry'
 
-// [lesson] at this moment, the component to be render is hard-coded...
+// [lesson] at this moment, the component to be render is hard-coded... 
+// [todo] next step: load a dynamic layout (json file etc) to define the components through runtime to be rendered (adds flexibility as no need to recompile the code base)
 const BarChart = componentRegistry.barchart.component
 
 const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']

@@ -56,6 +56,8 @@ function renderChart() {
 
     series: [
       {
+        // [lesson] the type is hard-coded here... bar(chart)
+        // possible values: bar, line, pie, scatter, etc.
         type: 'bar',
         data: props.values,
       },
