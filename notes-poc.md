@@ -1,5 +1,11 @@
 # [ brainstorming notes ]
 
+## list of POC(s)
+
+1. ✅ test basic tailwindcss and echarts and vue integration
+2. ❌ add in dynamic layout.json feature to dynamically render the dashboard components 1 by 1 (now is hard-coded)
+3. ❌ add in attributes merge for component(s)
+
 ## (done) suggested layout
 ```bash
 boardkit/
