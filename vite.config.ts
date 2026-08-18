@@ -22,7 +22,7 @@ export default defineConfig({
   },
   server: {
     // set the port to 3000 when vite server is running
-    port: 3000,
+    port: 3838,
     strictPort: true,
   },
 })

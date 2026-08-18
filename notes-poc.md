@@ -3,8 +3,10 @@
 ## list of POC(s)
 
 1. ✅ test basic tailwindcss and echarts and vue integration
-2. ❌ add in dynamic layout.json feature to dynamically render the dashboard components 1 by 1 (now is hard-coded)
-3. ❌ add in attributes merge for component(s)
+-. ❌ add in dynamic layout.json feature to dynamically render the dashboard components 1 by 1 (now is hard-coded)
+-. ❌ add in attributes merge for component(s)
+-. ❌ enhance the dashboard container widget (reference kibana, per widget has a common set of buttons like `_ ☐ ✗` buttons on top right)
+-. ❌ enhance the dashboard layout syntax; having rows and cols concept (width or smart-width like flex containers)
 
 ## (done) suggested layout
 ```bash
