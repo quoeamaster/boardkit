@@ -225,5 +225,10 @@ function showMessage(message: string) {
         </div>
     </div>
 
+    <div class="spacer mx-6">&nbsp;</div>
+    <div class="text-lg font-bold my-4 px-4">access on another static endpoint:</div>
+    <img src="http://localhost:3000/product/lightning_logo.png" alt="lightning logo" class="w-10" />
+    
+
   </div>
 </template>
