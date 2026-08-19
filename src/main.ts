@@ -9,6 +9,7 @@ import './themes/dark.css'
 
 import App from './App.vue'
 import router from './router'
+import { isDebugModeOn } from '@/utils/debug'
 
 // set a default theme (first)
 // [lesson] alternative way to set the theme
@@ -18,5 +19,9 @@ document.documentElement.dataset.theme = 'default';
 const app = createApp(App)
     .use(router)
     .use(createPinia());
+
+// [lesson] globalProperties are available in every template as `$name`.
+// That avoids repeating import.meta.env (and the helper) in each view.
+app.config.globalProperties.$isDebugModeOn = isDebugModeOn
 
 app.mount('#app')

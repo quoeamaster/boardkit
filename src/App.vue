@@ -13,6 +13,9 @@
         <RouterLink to="/dashboard">
           Dashboard
         </RouterLink>
+        <RouterLink to="/dashboard-render-demo">
+          Dashboard Render Demo
+        </RouterLink>
 
         <RouterLink to="/themes-demo">
           Themes Demo
@@ -22,6 +25,7 @@
           Components Demo
         </RouterLink>
       </div>
+
     </nav>
 
     <main class="p-6">

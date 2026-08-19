@@ -1,3 +1,13 @@
 {
-    "profile": "multi_dashboard"
+    "profile": "multi_dashboard",
+    "test_only": {
+        "widgets": [
+            {
+                "id": "barchart"
+            },
+            {
+                "id": "button"
+            }
+        ]
+    }
 }

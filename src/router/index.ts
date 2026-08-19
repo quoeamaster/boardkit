@@ -25,6 +25,10 @@ const router = createRouter({
       path: '/components-demo',
       component: () => import('@/views/ComponentsDemo.vue'),
     },
+    {
+      path: '/dashboard-render-demo',
+      component: () => import('@/views/DashboardRenderDemo.vue'),
+    },
 
     // {
     //   path: '/components',
