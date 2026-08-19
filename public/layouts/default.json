@@ -1,5 +1,11 @@
 {
-    "profile": "default",
+    "test_only": {
+        "widgets": {
+            "id": "barchart"
+        }
+    },
+
+    "layout": "default",
     "version": 1,
     "size_defaults": { "width": 3, "height": "small" },
     "rows": [
@@ -29,6 +35,8 @@
         "version: related to the version / revision of the layout definition tracked by QuickBoard; essential for rollback to a specific version",
 
         "per widget, the size.height would be the `same` across the row, hence the largest provided value would win in this case, eg. widget_A-height=small, widget_B-height=large, then height would be `large` for the row",
-        "per widget, the sum of size.row MUST be `12` per row"
+        "per widget, the sum of size.row MUST be `12` per row",
+
+        "test_only: use this section to test the component registry and rendering logic without the need to create a full layout (to be removed)"
     ]
   }

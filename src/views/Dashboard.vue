@@ -57,6 +57,30 @@ watch(
 )
 
 // -------------------------------------------------------------
+
+let actualComponent = null
+watch(
+  layoutContent,
+  (content) => {
+    // reset
+    actualComponent = null
+
+    if (content && typeof content === 'object' && 'test_only' in content) {
+      const testOnly = content.test_only as { widgets: { id: string } }
+      if (testOnly) {
+        actualComponent = componentRegistry[testOnly.widgets.id].component
+      }
+    }
+  },
+  {
+    immediate: true,
+  }
+)
+
+const labels_2 = ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const values_2 = [620, 80, 350, 230, 190, 560]
+
+
 </script>
 
 <template>
@@ -93,12 +117,11 @@ watch(
       {{ errorMsg }}
     </div>
 
-    <div v-else class="text-xs text-gray-500 width-full max-h-80 overflow-auto">
+    <div v-else class="text-xs text-gray-500 width-full max-h-30 overflow-auto">
       <pre>{{ JSON.stringify(layoutContent as unknown, null, 2) }}</pre>
     </div>
 
     <!-- [section] hard-code dashboard showing a barchart -->
-
     <div class="rounded-lg border p-6">
       <!-- [lesson] the component is rendered dynamically based on the type (MAGIC here) -->
       <component
@@ -107,6 +130,20 @@ watch(
         :values="values"
         title="Monthly Revenue"
       />
+    </div>
+
+    <!-- [section] actual component rendering -->
+    <div v-if="actualComponent">
+      <div class="rounded-lg border p-6">
+      <!-- [lesson] really a dynamic component rendering here (based on default.json -> test_only.widgets.id) -->
+      <!-- :is = "{variable_name_holding_the_component}"; also actualComponent need not be a `ref` - check warnings from dev console... -->
+      <component
+        :is="actualComponent"
+        :labels="labels_2"
+        :values="values_2"
+        title="Monthly Revenue - dynamic"
+      />
+    </div>
     </div>
   </div>
 </template>

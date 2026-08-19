@@ -11,42 +11,38 @@
 
 ## (done) suggested layout
 ```bash
-boardkit/
-│
-├── src/
-│   │
-│   ├── components/
-│   │   └── board/
-│   │       ├── BoardButton.vue
-│   │       ├── BoardCombo.vue
-│   │       └── BoardBarChart.vue
-│   │
-│   ├── registry/
-│   │   ├── component-registry.ts
-│   │   └── types.ts
-│   │
-│   ├── themes/
-│   │   ├── default.css
-│   │   └── dark.css
-│   │
-│   ├── stores/
-│   │   └── theme.ts
-│   │
-│   ├── router/
-│   │   └── index.ts
-│   │
-│   ├── views/
+src/
+├── components/
+│   ├── dashboard/
 │   │   ├── Dashboard.vue
-│   │   ├── Components.vue
-│   │   └── Themes.vue
+│   │   ├── DashboardRenderer.vue
+│   │   ├── LayoutRenderer.vue
+│   │   └── WidgetRenderer.vue
 │   │
-│   ├── App.vue
-│   ├── main.ts
-│   └── style.css
+│   ├── layouts/
+│   │   ├── GridLayout.vue
+│   │   └── FreeformLayout.vue
+│   │
+│   └── widgets/
+│       ├── BarChart.vue
+│       ├── LineChart.vue
+│       ├── Table.vue
+│       └── KPI.vue
 │
-├── vite.config.ts
-├── package.json
-└── ...
+├── registry/
+│   ├── widgets.ts
+│   └── layouts.ts
+│
+├── resolver/
+│   ├── widget.ts
+│   ├── layout.ts
+│   └── attributes.ts
+│
+├── models/
+│   └── dashboard.ts
+│
+└── data/
+    └── default.json
 ```
 
 ## ultimate form of a sample barchart component:
