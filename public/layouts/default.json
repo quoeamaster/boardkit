@@ -1,8 +1,13 @@
 {
     "test_only": {
-        "widgets": {
-            "id": "barchart"
-        }
+        "widgets": [
+            {
+                "id": "barchart"
+            },
+            {
+                "id": "button"
+            }
+        ]
     },
 
     "layout": "default",

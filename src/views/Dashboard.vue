@@ -59,6 +59,7 @@ watch(
 // -------------------------------------------------------------
 
 let actualComponent = null
+let actualComponent_2 = null
 watch(
   layoutContent,
   (content) => {
@@ -66,9 +67,13 @@ watch(
     actualComponent = null
 
     if (content && typeof content === 'object' && 'test_only' in content) {
-      const testOnly = content.test_only as { widgets: { id: string } }
-      if (testOnly) {
-        actualComponent = componentRegistry[testOnly.widgets.id].component
+      // default.json: test_only.widgets = [{ id: "barchart" }, { id: "button" }]
+      const widgets = (content as { test_only: { widgets: { id: string }[] } }).test_only?.widgets
+      if (widgets?.[0]) {
+        actualComponent = componentRegistry[widgets[0].id].component
+      }
+      if (widgets?.[1]) {
+        actualComponent_2 = componentRegistry[widgets[1].id].component
       }
     }
   },
@@ -80,6 +85,11 @@ watch(
 const labels_2 = ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 const values_2 = [620, 80, 350, 230, 190, 560]
 
+function alertMsg(msg: string) {
+  alert(msg)
+}
+
+// -------------------------------------------------------------
 
 </script>
 
@@ -143,6 +153,12 @@ const values_2 = [620, 80, 350, 230, 190, 560]
         :values="values_2"
         title="Monthly Revenue - dynamic"
       />
+      <component
+        :is="actualComponent_2"
+        label="Click me"
+        variant="success"
+        size="md"
+        @click="alertMsg('qb-button [success] clicked')">button here</component>
     </div>
     </div>
   </div>
