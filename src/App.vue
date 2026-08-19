@@ -21,19 +21,6 @@
         <RouterLink to="/components-demo">
           Components Demo
         </RouterLink>
-
-        <!-- RouterLink to="/tailwind-css-test">
-          Tailwind CSS Test
-        </RouterLink>
-
-        <RouterLink to="/components">
-          Components
-        </RouterLink>
-
-        <RouterLink to="/themes">
-          Themes
-        </RouterLink -->
-
       </div>
     </nav>
 

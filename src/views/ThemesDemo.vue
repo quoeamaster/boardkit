@@ -6,8 +6,6 @@ import BoardButton from '@/components/board/BoardButton.vue'
 // import BoardSelect from '@/components/board/BoardSelect.vue' // actually the value of the import object is ambiquous
 import QbSelect from '@/components/board/BoardSelect.vue'
 
-console.log(QbSelect)
-
 const themeStore = useThemeStore()
 
 // [lesson] ref('sg') means the selected value is bound to the 'sg' string

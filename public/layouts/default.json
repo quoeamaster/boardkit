@@ -1,0 +1,34 @@
+{
+    "profile": "default",
+    "version": 1,
+    "size_defaults": { "width": 3, "height": "small" },
+    "rows": [
+      {
+        "widgets": [
+          { "id": "revenue", "size": { "width": 3 } },
+          { "id": "orders", "size": { "width": 3, "height": "medium" } },
+          { "id": "customers", "size": { "height": "medium" } },
+          { "id": "margin" }
+        ]
+      },
+      {
+        "widgets": [
+          { "id": "sales-chart", "size": { "width": 6, "height": "large" } },
+          { "id": "top-products" }
+        ]
+      },
+      {
+        "widgets": [
+          { "id": "orders-table", "size": { "width": 12, "height": "small" } }
+        ]
+      }
+    ],
+    "comments": [
+        "size_defaults: use these values if not provided in the widget definition",
+        "widgets: per widget definition, the size is optional (can inherit from size_defaults), hence the internal `width` and `height` properties are again optional",
+        "version: related to the version / revision of the layout definition tracked by QuickBoard; essential for rollback to a specific version",
+
+        "per widget, the size.height would be the `same` across the row, hence the largest provided value would win in this case, eg. widget_A-height=small, widget_B-height=large, then height would be `large` for the row",
+        "per widget, the sum of size.row MUST be `12` per row"
+    ]
+  }
