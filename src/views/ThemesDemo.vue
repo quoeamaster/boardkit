@@ -5,6 +5,7 @@ import type { ThemeName } from '@/stores/theme'
 import BoardButton from '@/components/board/BoardButton.vue'
 // import BoardSelect from '@/components/board/BoardSelect.vue' // actually the value of the import object is ambiquous
 import QbSelect from '@/components/board/BoardSelect.vue'
+import BoardMarkdown from '@/components/board/BoardMarkdown.vue'
 
 const themeStore = useThemeStore()
 
@@ -40,6 +41,16 @@ const showNotification = (message: string) => {
 function showMessage(message: string) {
   alert(message);
 }
+
+const markdownContent = `
+<h1 class="text-xl">this is a header 1 (using tailwindcss), but won't work due to not rendering into html directly</h1>
+# this is a header 1
+## this is a header 2
+### this is a sub-subheader (3), [link to google](https://www.google.com)
+#### this is a header 4
+##### this is a header 5
+###### this is a header 6
+`
 </script>
 
 <template>
@@ -227,6 +238,17 @@ function showMessage(message: string) {
     <div class="text-lg font-bold my-4 px-4">access on another static endpoint:</div>
     <img src="http://localhost:3000/product/lightning_logo.png" alt="lightning logo" class="w-10" />
     
+    <div class="spacer mx-6">&nbsp;</div>
+    <div class="text-lg font-bold my-4 px-4">BoardSelect component:</div>
+
+    <div class="flex flex-col gap-2 w-full max-w-3xl">
+        <div class="flex items-center gap-4">
+            <div class="w-40 text-right">markdown with provided content:</div>
+            <div class="w-full">
+              <BoardMarkdown :content="markdownContent" />
+            </div>
+        </div>
+    </div>
 
   </div>
 </template>

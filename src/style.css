@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @layer components {
   /* button is the base button style, associate with the themed button set */
@@ -45,3 +46,26 @@
     background-size: 1rem;
   }
 }
+
+/* [lesson] base layer is the layer that contains the base styles for the html elements (e.g. div, h1), they are not handled like a "class" here but "element" */
+/* [obsolete] use tailwindcss typography layer instead
+/* @layer base {
+  h1 {
+    @apply text-2xl font-bold;
+  }
+  h2 {
+    @apply text-xl font-bold;
+  }
+  h3 {
+    @apply text-lg font-bold;
+  }
+  h4 {
+    @apply text-base font-bold;
+  } 
+  h5 {
+    @apply text-sm font-bold;
+  }
+  h6 {
+    @apply text-xs font-bold;
+  }
+} */
