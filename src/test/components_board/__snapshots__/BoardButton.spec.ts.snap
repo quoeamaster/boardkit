@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BoardButton > renders correctly 1`] = `
+"<button data-v-14b2b782="" type="button" class="inline-flex items-center justify-center font-medium transition rounded-(--bk-radius-md) disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer bg-(--bk-color-primary) text-(--bk-color-background) px-4 py-2 text-sm">
+  <!-- [lesson] the slot is the (optional) content of the button; theoretcally, you can add images, text surrounded by the button -->
+</button>"
+`;

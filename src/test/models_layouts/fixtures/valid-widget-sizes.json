@@ -1,0 +1,15 @@
+{
+    "layout": "grid",
+    "version": 1,
+    "size_defaults": { "width": 3, "height": "small" },
+    "rows": [
+        {
+            "widgets": [
+                { "name": "revenue", "size": { "width": 3 } },
+                { "name": "orders", "size": { "width": 3, "height": "medium" } },
+                { "name": "customers", "size": { "height": "medium" } },
+                { "name": "margin" }
+            ]
+        }
+    ]
+}

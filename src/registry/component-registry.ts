@@ -1,10 +1,8 @@
-// import BoardButton from '@/components/board/BoardButton.vue'
-// import BoardCombo from '@/components/board/BoardCombo.vue'
 import BoardBarChart from '@/components/board/BoardBarChart.vue'
 import BoardButton from '@/components/board/BoardButton.vue'
 import BoardSelect from '@/components/board/BoardSelect.vue'
 
-import type { BoardComponentDefinition } from './types'
+import type { BoardComponentDefinition } from './component-types'
 
 export const componentRegistry: Record<
   string,

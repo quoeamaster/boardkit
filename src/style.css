@@ -45,6 +45,10 @@
     background-position: right 0.6rem center;
     background-size: 1rem;
   }
+
+  .debug-container {
+    @apply border-2 border-orange-200 rounded-lg py-4 px-8 bg-gray-100;
+  }
 }
 
 /* [lesson] base layer is the layer that contains the base styles for the html elements (e.g. div, h1), they are not handled like a "class" here but "element" */

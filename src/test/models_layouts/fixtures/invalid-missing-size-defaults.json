@@ -1,0 +1,11 @@
+{
+    "layout": "grid",
+    "version": 1,
+    "rows": [
+        {
+            "widgets": [
+                { "name": "revenue" }
+            ]
+        }
+    ]
+}
