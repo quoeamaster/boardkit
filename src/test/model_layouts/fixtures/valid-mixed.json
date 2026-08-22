@@ -1,0 +1,27 @@
+{
+    "name": "Sales Dashboard",
+    "layouts": [
+        {
+            "layout": "grid",
+            "version": 1,
+            "size_defaults": { "width": 3, "height": "small" },
+            "rows": [
+                {
+                    "widgets": [
+                        { "name": "revenue" }
+                    ]
+                }
+            ]
+        },
+        {
+            "layout": "freeflow",
+            "version": 1,
+            "comments": [
+                "freeflow widgets use absolute x/y coordinates"
+            ],
+            "widgets": [
+                { "name": "orders", "x": 0, "y": 0, "width": 240, "height": 160 }
+            ]
+        }
+    ]
+}

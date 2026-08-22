@@ -26,5 +26,7 @@ export const GridLayoutSchema = z.object({
     // [note][feature] for the meantime, only 1 element is allowed in the rows array (phase 2 will allow multiple rows)
     rows: z.array(z.object({
         widgets: z.array(GridWidgetSchema),
-    })).length(1),
+    })).min(1),
 })
+
+export type GridLayout = z.infer<typeof GridLayoutSchema>

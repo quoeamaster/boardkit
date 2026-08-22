@@ -1,0 +1,9 @@
+{
+    "name": "Sales Dashboard",
+    "layouts": [
+        {
+            "layout": "freeflow",
+            "version": 1
+        }
+    ]
+}

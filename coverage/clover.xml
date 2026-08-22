@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1787323290139" clover="3.2.0">
-  <project timestamp="1787323290139" name="All files">
-    <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1" elements="10" coveredelements="10" complexity="0" loc="9" ncloc="9" packages="4" files="18" classes="18"/>
+<coverage generated="1787413843658" clover="3.2.0">
+  <project timestamp="1787413843658" name="All files">
+    <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1" elements="14" coveredelements="14" complexity="0" loc="13" ncloc="13" packages="5" files="36" classes="36"/>
     <package name="components.board">
       <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="BoardButton.vue" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/components/board/BoardButton.vue">
@@ -13,67 +13,128 @@
         <line num="45" count="4" type="stmt"/>
       </file>
     </package>
-    <package name="models.layouts">
+    <package name="models">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="dashboard.ts" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/models/dashboard.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="models.layouts">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="freeflow-layout.ts" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/models/layouts/freeflow-layout.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
       <file name="grid-layout.ts" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/models/layouts/grid-layout.ts">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
       </file>
     </package>
     <package name="models.widgets">
-      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="freeflow-widgets.ts" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/models/widgets/freeflow-widgets.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="1" type="stmt"/>
+      </file>
       <file name="grid-widget.ts" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/models/widgets/grid-widget.ts">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
       </file>
     </package>
-    <package name="test.models_layouts.fixtures">
+    <package name="test.model_layouts.fixtures">
       <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="invalid-empty-rows.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/models_layouts/fixtures/invalid-empty-rows.json">
+      <file name="dashboard-unparseable-trailing-comma.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/dashboard-unparseable-trailing-comma.json">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="invalid-height-enum.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/models_layouts/fixtures/invalid-height-enum.json">
+      <file name="dashboard-unparseable-truncated.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/dashboard-unparseable-truncated.json">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="invalid-layout-type.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/models_layouts/fixtures/invalid-layout-type.json">
+      <file name="invalid-empty-rows.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/invalid-empty-rows.json">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="invalid-missing-layout.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/models_layouts/fixtures/invalid-missing-layout.json">
+      <file name="invalid-freeflow-missing-version.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/invalid-freeflow-missing-version.json">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="invalid-missing-size-defaults.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/models_layouts/fixtures/invalid-missing-size-defaults.json">
+      <file name="invalid-freeflow-missing-widgets.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/invalid-freeflow-missing-widgets.json">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="invalid-missing-version.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/models_layouts/fixtures/invalid-missing-version.json">
+      <file name="invalid-freeflow-widget-missing-coords.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/invalid-freeflow-widget-missing-coords.json">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="invalid-multiple-rows.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/models_layouts/fixtures/invalid-multiple-rows.json">
+      <file name="invalid-freeflow-widget-missing-name.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/invalid-freeflow-widget-missing-name.json">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="invalid-version-zero.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/models_layouts/fixtures/invalid-version-zero.json">
+      <file name="invalid-grid-missing-version.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/invalid-grid-missing-version.json">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="invalid-widget-missing-name.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/models_layouts/fixtures/invalid-widget-missing-name.json">
+      <file name="invalid-height-enum.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/invalid-height-enum.json">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="invalid-width-out-of-range.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/models_layouts/fixtures/invalid-width-out-of-range.json">
+      <file name="invalid-layout-type.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/invalid-layout-type.json">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="unparseable-trailing-comma.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/models_layouts/fixtures/unparseable-trailing-comma.json">
+      <file name="invalid-missing-layout.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/invalid-missing-layout.json">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="unparseable-truncated.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/models_layouts/fixtures/unparseable-truncated.json">
+      <file name="invalid-missing-layouts.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/invalid-missing-layouts.json">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="valid-minimal.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/models_layouts/fixtures/valid-minimal.json">
+      <file name="invalid-missing-name.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/invalid-missing-name.json">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="valid-widget-sizes.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/models_layouts/fixtures/valid-widget-sizes.json">
+      <file name="invalid-missing-size-defaults.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/invalid-missing-size-defaults.json">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="valid-with-comments.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/models_layouts/fixtures/valid-with-comments.json">
+      <file name="invalid-missing-version.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/invalid-missing-version.json">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="invalid-unknown-layout-type.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/invalid-unknown-layout-type.json">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="invalid-version-zero.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/invalid-version-zero.json">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="invalid-widget-missing-name.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/invalid-widget-missing-name.json">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="invalid-width-out-of-range.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/invalid-width-out-of-range.json">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="unparseable-trailing-comma.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/unparseable-trailing-comma.json">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="unparseable-truncated.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/unparseable-truncated.json">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="valid-freeflow.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/valid-freeflow.json">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="valid-grid-multiple-rows.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/valid-grid-multiple-rows.json">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="valid-grid.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/valid-grid.json">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="valid-minimal.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/valid-minimal.json">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="valid-mixed.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/valid-mixed.json">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="valid-multiple-rows.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/valid-multiple-rows.json">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="valid-widget-id.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/valid-widget-id.json">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="valid-widget-sizes.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/valid-widget-sizes.json">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="valid-with-comments.json" path="/Users/jasonwong/_backup/development/products/webapp/vue/boardkit/src/test/model_layouts/fixtures/valid-with-comments.json">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
     </package>

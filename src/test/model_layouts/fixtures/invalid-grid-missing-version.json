@@ -1,0 +1,16 @@
+{
+    "name": "Sales Dashboard",
+    "layouts": [
+        {
+            "layout": "grid",
+            "size_defaults": { "width": 3, "height": "small" },
+            "rows": [
+                {
+                    "widgets": [
+                        { "name": "revenue" }
+                    ]
+                }
+            ]
+        }
+    ]
+}

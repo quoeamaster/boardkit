@@ -1,0 +1,16 @@
+{
+    "layouts": [
+        {
+            "layout": "grid",
+            "version": 1,
+            "size_defaults": { "width": 3, "height": "small" },
+            "rows": [
+                {
+                    "widgets": [
+                        { "name": "revenue" }
+                    ]
+                }
+            ]
+        }
+    ]
+}

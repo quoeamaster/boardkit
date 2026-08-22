@@ -1,0 +1,13 @@
+{
+    "name": "Sales Dashboard",
+    "layouts": [
+        {
+            "layout": "freeflow",
+            "version": 1,
+            "widgets": [
+                { "name": "revenue", "x": 0, "y": 0, "width": 300, "height": 200 },
+                { "name": "orders", "x": 320, "y": 0, "width": 300, "height": 200 }
+            ]
+        }
+    ]
+}

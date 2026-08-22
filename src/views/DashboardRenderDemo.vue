@@ -5,6 +5,7 @@ import DashboardRenderer from '@/components/renderer/DashboardRenderer.vue'
 const layoutContent = ref<unknown>(null)
 
 onMounted(async () => {
+  // [note] hard-code for poc ONLY
   const response = await fetch(`${import.meta.env.BASE_URL}/layouts/default.json`)
   layoutContent.value = await response.json()
 })
