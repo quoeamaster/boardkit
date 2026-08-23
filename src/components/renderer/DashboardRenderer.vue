@@ -57,7 +57,7 @@ const layoutComponent = computed(() => {
     <!-- _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_- -->
     <div v-if="$isDebugModeOn()" class="debug-container">
         <div class="debug-label">
-            DEBUG_MODE_ON = {{ $isDebugModeOn() }}
+            DEBUG_MODE_ON = {{ $isDebugModeOn() }} - DashboardRenderer.vue
         </div>
         <!-- using <pre> tag to preserve the formatting of the layoutContent -->
         <!-- [note] using props.layoutContent (raw string) should be the same as dashboardConfig (typed) -->

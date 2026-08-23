@@ -30,3 +30,4 @@ export const GridLayoutSchema = z.object({
 })
 
 export type GridLayout = z.infer<typeof GridLayoutSchema>
+export type GridSize = z.infer<typeof GridSizeSchema>

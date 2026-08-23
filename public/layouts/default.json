@@ -8,21 +8,21 @@
         "rows": [
             {
             "widgets": [
-                { "name": "revenue", "size": { "width": 3 } },
-                { "name": "orders", "size": { "width": 3, "height": "medium" } },
-                { "name": "customers", "size": { "height": "medium" } },
-                { "name": "margin" }
+                { "name": "barchart", "id": "revenue", "size": { "width": 3 } },
+                { "name": "barchart", "id": "orders", "size": { "width": 3, "height": "medium" } },
+                { "name": "barchart", "id": "customers", "size": { "height": "medium" } },
+                { "name": "barchart", "id": "margin" }
             ]
             },
             {
             "widgets": [
-                { "name": "sales-chart", "size": { "width": 6, "height": "large" } },
-                { "name": "top-products" }
+                { "name": "barchart", "id": "sales-chart", "size": { "width": 6, "height": "large" } },
+                { "name": "barchart", "id": "top-products" }
             ]
             },
             {
             "widgets": [
-                { "name": "orders-table", "id": "cp-orders", "size": { "width": 12, "height": "small" } }
+                { "name": "barchart", "id": "orders-table", "size": { "width": 12, "height": "small" } }
             ]
             }
         ],
