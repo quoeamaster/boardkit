@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+// import { computed } from 'vue'
 import type { GridLayout } from '@/models/layouts/grid-layout'
 import type { GridSize } from '@/models/layouts/grid-layout'
+import type { GridWidget } from '@/models/widgets/grid-widget'
 
 interface Props {
     layout: GridLayout
@@ -34,20 +35,43 @@ const sizeWidthClasses: Record<NonNullable<GridSize['width']>, string> = {
 }
 // function to get the height classes based on the height value
 const sizeHeightClasses: Record<NonNullable<GridSize['height']>, string> = {
-    small: 'h-120px',
-    medium: 'h-300px',
-    large: 'h-500px',
+    small: 'h-[120px]',
+    medium: 'h-[300px]',
+    large: 'h-[500px]',
+}
+
+function getRowWidgetMaxHeight(row: GridLayout['rows'][number]) {
+    // default is SMALL
+    let max_height = sizeHeightClasses.small
+    const sizeDefaults = getSizeDefaults()
+
+    for (const widget of row.widgets) {
+        let widget_height = widget.size?.height || sizeDefaults?.height
+        if (widget_height === 'large') {
+            max_height = sizeHeightClasses.large
+        } else if (widget_height === 'medium') {
+            max_height = sizeHeightClasses.medium
+        }
+    }
+    return max_height
+}
+
+function computeWidgetSizeClasses(widget: GridWidget, row: GridLayout['rows'][number]) {
+    const sizeDefaults = getSizeDefaults()
+    let widget_width = widget.size?.width || sizeDefaults?.width
+    let widget_height_class = getRowWidgetMaxHeight(row)
+
+    return `${sizeWidthClasses[widget_width]} ${widget_height_class}`
 }
 
 </script>
 
 <template>
-<!-- per row -->
 <div v-for="(row, index) in getRows()" :key="`row-${index}`" class="grid grid-cols-12 gap-2 mb-1
     border border-gray-300 rounded-md p-2"
 >
-    <div v-for="(widget, index) in row.widgets" :key="`widget-${index}`" class="col-span-3">
-        <span>{{ widget.name }} -> {{ widget.id }}</span>
+    <div v-for="(widget, index) in row.widgets" :key="`widget-${index}`" :class="computeWidgetSizeClasses(widget, row)">
+        <span>{{ widget.name }} -> {{ widget.id }} => {{ computeWidgetSizeClasses(widget, row) }}</span>
     </div>
     <!-- span class="col-span-6">{{ index }}</span>
     <span class="col-span-6">widgets size: {{ row.widgets.length }}</span -->

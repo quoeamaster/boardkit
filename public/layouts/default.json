@@ -16,13 +16,18 @@
             },
             {
             "widgets": [
-                { "name": "barchart", "id": "sales-chart", "size": { "width": 6, "height": "large" } },
-                { "name": "barchart", "id": "top-products" }
+                { "name": "barchart", "id": "sales-chart", "size": { "width": 6, "height": "medium" } },
+                { "name": "barchart", "id": "top-products", "size": { "width": 6, "height": "small" } }
             ]
             },
             {
             "widgets": [
-                { "name": "barchart", "id": "orders-table", "size": { "width": 12, "height": "small" } }
+                { "name": "barchart", "id": "orders-table", "size": { "width": 12, "height": "large" } }
+            ]
+            },
+            {
+            "widgets": [
+                { "name": "barchart", "id": "orders-table-sm", "size": { "width": 12 } }
             ]
             }
         ],

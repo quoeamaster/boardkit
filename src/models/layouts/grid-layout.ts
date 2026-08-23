@@ -8,6 +8,10 @@ export const GridSizeSchema = z.object({
     height: z.enum(['small', 'medium', 'large']).default('medium'),
 })
 
+// export const GridRowsSchema = z.object({
+//     widgets: z.array(GridWidgetSchema),
+// })
+
 export const GridLayoutSchema = z.object({
     // important: this is a MUST field and will be used in discrimateUnion() later on...
     layout: z.literal('grid'),
@@ -24,6 +28,7 @@ export const GridLayoutSchema = z.object({
 
     // rows of Grid-Widget(s)
     // [note][feature] for the meantime, only 1 element is allowed in the rows array (phase 2 will allow multiple rows)
+    //rows: z.array(GridRowsSchema).min(1),
     rows: z.array(z.object({
         widgets: z.array(GridWidgetSchema),
     })).min(1),
@@ -31,3 +36,4 @@ export const GridLayoutSchema = z.object({
 
 export type GridLayout = z.infer<typeof GridLayoutSchema>
 export type GridSize = z.infer<typeof GridSizeSchema>
+//export type GridRows = z.infer<typeof GridRowsSchema>
