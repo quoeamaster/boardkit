@@ -83,8 +83,12 @@ function computeWidgetSizeClasses(widget: GridWidget) {
 
 <!-- removing classes => border border-gray-300 rounded-md -->
 <div v-for="(row, index) in getRows()" :key="`row-${index}`" class="grid grid-cols-12 gap-2 m-2 p-0">
-    <div v-for="(widget, index) in row.widgets" :key="`widget-${index}`" :class="computeWidgetSizeClasses(widget)">
+    <div v-for="(widget, index) in row.widgets" 
+        :key="`widget-${index}`" 
+        :class="computeWidgetSizeClasses(widget)"
+        >
         <BoardWidgetPanel :widget="widget">
+            <!-- [note] optional slot content -->
             <span>
                 {{ widget.name }} -> {{ widget.id }} 
                 => {{ computeWidgetSizeClasses(widget) }}

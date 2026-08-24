@@ -52,6 +52,13 @@
   .debug-label {
     @apply mt-2 text-xs text-gray-400 py-2;
   }
+
+  .panel-menu-bar-title {
+    @apply text-xs font-bold;
+  }
+  .panel-menu-bar-icon {
+    @apply text-lg cursor-pointer;
+  }
 }
 
 /* [lesson] base layer is the layer that contains the base styles for the html elements (e.g. div, h1), they are not handled like a "class" here but "element" */
