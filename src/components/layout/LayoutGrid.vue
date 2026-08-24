@@ -1,8 +1,9 @@
 <script setup lang="ts">
-// import { computed } from 'vue'
+import { computed } from 'vue'
 import type { GridLayout } from '@/models/layouts/grid-layout'
 import type { GridSize } from '@/models/layouts/grid-layout'
 import type { GridWidget } from '@/models/widgets/grid-widget'
+import BoardWidgetPanel from '@/components/board/BoardWidgetPanel.vue'
 
 interface Props {
     layout: GridLayout
@@ -15,7 +16,8 @@ function getSizeDefaults() {
 }
 
 function getRows() {
-    return props.layout?.rows
+    //return props.layout?.rows
+    return resolvedLayout.value?.rows
 }
 
 // function to get the cols-12 classes based on the width value
@@ -40,41 +42,55 @@ const sizeHeightClasses: Record<NonNullable<GridSize['height']>, string> = {
     large: 'h-[500px]',
 }
 
-function getRowWidgetMaxHeight(row: GridLayout['rows'][number]) {
-    // default is SMALL
-    let max_height = sizeHeightClasses.small
+const resolvedLayout = computed(() => {
+    // cloning the original layout to avoid modifying the original layout
+    let layoutClone = { ...props.layout }
     const sizeDefaults = getSizeDefaults()
 
-    for (const widget of row.widgets) {
-        let widget_height = widget.size?.height || sizeDefaults?.height
-        if (widget_height === 'large') {
-            max_height = sizeHeightClasses.large
-        } else if (widget_height === 'medium') {
-            max_height = sizeHeightClasses.medium
+    for (const row of layoutClone.rows) {
+        let rowMaxHeight = 'small'
+
+        for (const widget of row.widgets) {
+            const currentWidgetHeight = widget.size?.height || sizeDefaults?.height
+            if (currentWidgetHeight === 'large') {
+                rowMaxHeight = 'large'
+            } else if (currentWidgetHeight === 'medium') {
+                rowMaxHeight = 'medium'
+            }
+
+            widget.size = {
+                width: widget.size?.width || sizeDefaults?.width,
+                height: currentWidgetHeight,
+            }
+        }
+        // set max height of the row
+        for (const widget of row.widgets) {
+            if (widget.size) {
+                widget.size.height = rowMaxHeight as NonNullable<GridSize['height']>
+            }
         }
     }
-    return max_height
-}
+    return layoutClone
+})
 
-function computeWidgetSizeClasses(widget: GridWidget, row: GridLayout['rows'][number]) {
-    const sizeDefaults = getSizeDefaults()
-    let widget_width = widget.size?.width || sizeDefaults?.width
-    let widget_height_class = getRowWidgetMaxHeight(row)
-
-    return `${sizeWidthClasses[widget_width]} ${widget_height_class}`
+function computeWidgetSizeClasses(widget: GridWidget) {
+    return `${sizeWidthClasses[widget.size?.width ?? 1]} ${sizeHeightClasses[widget.size?.height ?? 'small']}`
 }
 
 </script>
 
 <template>
-<div v-for="(row, index) in getRows()" :key="`row-${index}`" class="grid grid-cols-12 gap-2 mb-1
-    border border-gray-300 rounded-md p-2"
->
-    <div v-for="(widget, index) in row.widgets" :key="`widget-${index}`" :class="computeWidgetSizeClasses(widget, row)">
-        <span>{{ widget.name }} -> {{ widget.id }} => {{ computeWidgetSizeClasses(widget, row) }}</span>
+
+<!-- removing classes => border border-gray-300 rounded-md -->
+<div v-for="(row, index) in getRows()" :key="`row-${index}`" class="grid grid-cols-12 gap-2 m-2 p-0">
+    <div v-for="(widget, index) in row.widgets" :key="`widget-${index}`" :class="computeWidgetSizeClasses(widget)">
+        <BoardWidgetPanel :widget="widget">
+            <span>
+                {{ widget.name }} -> {{ widget.id }} 
+                => {{ computeWidgetSizeClasses(widget) }}
+            </span>
+        </BoardWidgetPanel>
     </div>
-    <!-- span class="col-span-6">{{ index }}</span>
-    <span class="col-span-6">widgets size: {{ row.widgets.length }}</span -->
 </div>
 
 <!-- _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_- -->
