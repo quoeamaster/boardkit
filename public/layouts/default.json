@@ -16,8 +16,8 @@
             },
             {
             "widgets": [
-                { "name": "barchart", "id": "sales-chart", "size": { "width": 6, "height": "medium" } },
-                { "name": "barchart", "id": "top-products", "size": { "width": 6, "height": "small" } }
+                { "name": "barchart", "id": "sales-chart", "size": { "width": 8, "height": "medium" } },
+                { "name": "barchart", "id": "top-products", "size": { "width": 4, "height": "small" } }
             ]
             },
             {

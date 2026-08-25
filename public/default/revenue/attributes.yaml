@@ -1,0 +1,18 @@
+# attributes.yaml is OPTIONAL, default values are used if not provided
+
+# title of the chart
+title: Top 5 Revenue sources
+
+# style of the chart
+style:
+  text-color: "#0000dd"
+  text-size: "8px"
+  background-color: "#d6d4d4"
+  
+# chart configuration
+chart:
+  type: "bar"
+  xAxis:
+    field: "month"
+  yAxis:
+    field: "revenue"

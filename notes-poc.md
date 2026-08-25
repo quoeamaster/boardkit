@@ -6,7 +6,8 @@
 2. ✅ add in dynamic layout.json loading (/public/layouts/default.json)
 3. ✅ based on layout.json, dynamically render the dashboard components 1 by 1 (now is hard-coded)
 4. ✅ enhance the dashboard layout syntax; having rows and cols concept (width or smart-width like flex containers; final idea 12-col grid design instead)
--. ❌ enhance the dashboard container widget (reference kibana, per widget has a common set of buttons like `_ ☐ ✗` buttons on top right)
+5. ✅ enhance the dashboard container widget (reference kibana, per widget has a common set of buttons like `_ ☐ ✗` buttons on top right)
+-. ❌ config file concept (poc)
 -. ❌ introduce renderer concept...
 -. ❌ add in attributes merge for component(s)
 -. ❌ notificationStore and drawer panel showing them

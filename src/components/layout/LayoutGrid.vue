@@ -6,7 +6,8 @@ import type { GridWidget } from '@/models/widgets/grid-widget'
 import BoardWidgetPanel from '@/components/board/BoardWidgetPanel.vue'
 
 interface Props {
-    layout: GridLayout
+    layout: GridLayout,
+    layoutFile: string
 }
 const props = defineProps<Props>()
 
@@ -87,7 +88,10 @@ function computeWidgetSizeClasses(widget: GridWidget) {
         :key="`widget-${index}`" 
         :class="computeWidgetSizeClasses(widget)"
         >
-        <BoardWidgetPanel :widget="widget">
+        <!-- _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_- -->
+        <!-- [note] panel is the container for a widget -->
+        <!-- _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_- -->
+        <BoardWidgetPanel :widget="widget" :layout-file="props.layoutFile">
             <!-- [note] optional slot content -->
             <span>
                 {{ widget.name }} -> {{ widget.id }} 
@@ -105,6 +109,7 @@ function computeWidgetSizeClasses(widget: GridWidget) {
         DEBUG_MODE_ON = {{ $isDebugModeOn() }} - LayoutGrid.vue
     </div>
     <div>
+        layout file: <span class="italic text-blue-500">{{ props.layoutFile }}</span>;
         layout type: {{ props.layout.layout }};
         version: {{ props.layout.version }};
         <div class="pt-2 font-bold text-md">rows related:</div>

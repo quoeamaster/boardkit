@@ -1,0 +1,18 @@
+# attributes.yaml is OPTIONAL, default values are used if not provided
+
+# title of the chart
+title: Sales over the last 12 months
+
+# style of the chart
+style:
+  text-color: "#00dd00"
+  text-size: "8px"
+  background-color: "#f28933"
+  
+# chart configuration
+chart:
+  type: "line"
+  xAxis:
+    field: "month"
+  yAxis:
+    field: "revenue"

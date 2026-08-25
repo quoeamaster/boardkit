@@ -24,6 +24,6 @@ onMounted(async () => {
       </p>
     </div>
     <!-- include the dashboard renderer component here -->
-    <DashboardRenderer :layout-content="layoutContent" />
+    <DashboardRenderer :layout-content="layoutContent" layout-file="default.json" />
 </div>
 </template>

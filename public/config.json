@@ -1,0 +1,12 @@
+{
+    "layout_folder": "/app/layouts/",
+    
+
+
+    "comment": [
+        "layout_folder : folder containing the layout files (e.g. default.json, multi_dashboard.json) Depends on the project, vite is relative to /public, web server could be absolute path accessible by the server)",
+        "widget_definitions_folder : [optional] folder containing the widget definitions. If provided will use the given path to look for widget definitions. If not provided, will use `layout_folder's` value + `chosen layout name' to lookup instead.",
+
+        "sample => \"widget_definition_folder\": \"/app/default/\","
+    ]
+}

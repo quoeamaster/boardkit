@@ -4,7 +4,8 @@ import { getLayoutComponent } from '@/registry/layout-registry'
 import { DashboardSchema, type Dashboard } from '@/models/dashboard'
 
 interface Props {
-    layoutContent: unknown
+    layoutContent: unknown,
+    layoutFile: string
 }
 
 const props = defineProps<Props>()
@@ -49,6 +50,7 @@ const layoutComponent = computed(() => {
     <!-- [feature] phase 2 will support multiple layouts, hence v-for the layouts array instead -->
     <component 
         :is="layoutComponent" 
+        :layout-file="layoutFile"
         v-if="layoutComponent && dashboardConfig"
         :layout="dashboardConfig.layouts[0]" />
 
