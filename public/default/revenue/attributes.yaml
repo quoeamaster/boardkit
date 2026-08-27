@@ -5,9 +5,9 @@ title: Top 5 Revenue sources
 
 # style of the chart
 style:
-  text-color: "#0000dd"
-  text-size: "8px"
-  background-color: "#d6d4d4"
+  textColor: "#0000dd"
+  textSize: "12px"
+  backgroundColor: "#d6d4d4"
   
 # chart configuration
 chart:

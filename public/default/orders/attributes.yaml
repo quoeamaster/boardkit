@@ -5,9 +5,9 @@ title: Sales over the last 12 months
 
 # style of the chart
 style:
-  text-color: "#00dd00"
-  text-size: "8px"
-  background-color: "#f28933"
+  textColor: "#00dd00"
+  textSize: "8px"
+  backgroundColor: "#f28933"
   
 # chart configuration
 chart:

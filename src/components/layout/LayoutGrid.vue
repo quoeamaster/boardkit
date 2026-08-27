@@ -92,11 +92,11 @@ function computeWidgetSizeClasses(widget: GridWidget) {
         <!-- [note] panel is the container for a widget -->
         <!-- _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_- -->
         <BoardWidgetPanel :widget="widget" :layout-file="props.layoutFile">
-            <!-- [note] optional slot content -->
-            <span>
+            <!-- [note] optional slot content (can use it for debug) -->
+            <!-- span>
                 {{ widget.name }} -> {{ widget.id }} 
                 => {{ computeWidgetSizeClasses(widget) }}
-            </span>
+            </span -->
         </BoardWidgetPanel>
     </div>
 </div>

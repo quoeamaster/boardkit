@@ -4,6 +4,10 @@ import type { GridWidget } from '@/models/widgets/grid-widget'
 import { fetchFile } from '@/utils/file'
 import { useConfigStore } from '@/stores/config'
 import { BoardKitError, BoardKitErrorCode } from '@/error/errors'
+import { attributesSchema } from '@/models/config/attributes'
+import type { Attributes } from '@/models/config/attributes'
+import { parse } from 'yaml'
+
 
 interface Props {
     widget: GridWidget,
@@ -12,6 +16,12 @@ interface Props {
 
 const props = defineProps<Props>()
 
+// helper function to get the file path for the widget
+// if configStore.getWidgetDefinitionsFolder is set
+// - use the value directly => ${widgetDefFolder}${props.widget.id}/
+// else
+// - strip the layoufFile's extension away => $layoutFile
+// - form the path => ${import.meta.env.BASE_URL}/${layoutFile}/
 const filePath = computed(() => {
     const configStore = useConfigStore()
     let widgetDefFolder = configStore.getWidgetDefinitionsFolder
@@ -23,7 +33,7 @@ const filePath = computed(() => {
     return `${widgetDefFolder}${props.widget.id}/`
 })
 
-const attributes = ref<unknown>(null)
+const attributes = ref<Attributes | null>(null)
 const query = ref<unknown>(null)
 
 onMounted(async () => {
@@ -36,7 +46,7 @@ onMounted(async () => {
             // if it is just the file is not available...
             if (error.code === BoardKitErrorCode.FILE_NOT_FOUND) {
                 // [todo] move to notifications
-                console.warn(`${filePath.value}/query.sql not found: ${error}`)
+                console.error(`${filePath.value}/query.sql not found: ${error}`)
                 query.value = null
             } else {
                 console.error('Error fetching query.yaml (other errors)', error)
@@ -47,14 +57,17 @@ onMounted(async () => {
     }
     // attributes.yaml which can be optional
     try {
-        attributes.value = await fetchFile(`${filePath.value}/attributes.yaml`, 'yaml')
-        // console.log('attributes', attributes.value)
+        let content = await fetchFile(`${filePath.value}/attributes.yaml`, 'yaml')
+        attributes.value = validateAttributesContent(content)
+        //console.log('attributes', attributes.value)
     } catch (error) {
         if (error instanceof BoardKitError) {
             if (error.code === BoardKitErrorCode.FILE_NOT_FOUND) {
                 // [todo] move to notifications
                 console.warn(`${filePath.value}/attributes.yaml not found: ${error}`)
-                attributes.value = null
+                // use defaults instead of null
+                attributes.value = validateAttributesContent('', true)
+                // console.log('attributes', attributes.value)
             } else {
                 console.error('Error fetching attributes.yaml (other errors)', error)
             }
@@ -63,6 +76,30 @@ onMounted(async () => {
         }
     }
 })
+
+// validate the attributes.yaml content
+function validateAttributesContent(content: string, isEmpty: boolean = false) {
+    // yaml parsed
+    const parsedContent = isEmpty ? {} : parse(content)
+    const result = attributesSchema.safeParse(parsedContent)
+
+    if (!result.success) {
+        console.log('result', result)
+        console.error(new BoardKitError(
+            BoardKitErrorCode.CONFIG_INVALID,
+            `Attributes content is invalid: ${content}; ${result}`,
+            {
+                widgetId: props.widget.id,
+                path: `${filePath.value}/attributes.yaml`,
+                status: 500,
+            }
+        ))
+        return null
+    }
+    return result.data
+}
+// [todo]
+// - missing sql contents validation
 // [todo]
 // configure the widget / chart based on the attributes.yaml
 // execute code from the sql file and render the result accordingly
@@ -72,9 +109,9 @@ onMounted(async () => {
 <template>
 <div class="border p-2 m-0 h-full panel">
     <!-- top level menu-bar -->
-    <div class="border-b border-gray-200 mb-2 flex h-8 items-center justify-between">
+    <div class="border-b border-gray-200 mb-2 flex max-h-32 items-center justify-between">
         <!-- Title -->
-        <div class="panel-menu-bar-title">BoardKit</div>
+        <div class="panel-menu-bar-title">{{ attributes?.title }}</div>
 
         <!-- Window controls -->
         <div class="flex h-full items-center gap-1 px-1.5">
@@ -82,7 +119,7 @@ onMounted(async () => {
         </div>
     </div>
 
-    <span>{{ props.widget }} - layout file: {{ props.layoutFile }} => </span>
+    <!-- span>{{ props.widget }} - layout file: {{ props.layoutFile }} => </span -->
     <slot />
 </div>
 </template>
