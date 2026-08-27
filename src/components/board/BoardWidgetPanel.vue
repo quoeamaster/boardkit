@@ -7,7 +7,7 @@ import { BoardKitError, BoardKitErrorCode } from '@/error/errors'
 import { attributesSchema } from '@/models/config/attributes'
 import type { Attributes } from '@/models/config/attributes'
 import { parse } from 'yaml'
-
+import type { QueryResponse } from '@/api/query/runQueryInterface'
 
 interface Props {
     widget: GridWidget,
@@ -35,14 +35,20 @@ const filePath = computed(() => {
 
 const attributes = ref<Attributes | null>(null)
 const query = ref<unknown>(null)
+const queryResult = ref<QueryResponse | null>(null)
 
 onMounted(async () => {
-    // console.log('filePath', filePath.value)
     // query.sql which is required
     try {
         query.value = await fetchFile(`${filePath.value}/query.sql`, 'sql')
-        // trigger QuickBoardServer to run the query
-        
+        // trigger QuickBoardServer to run the query [the middleware is actually the same vue.js app -> /api/query]
+        const result = await fetch('/api/query', {
+            method: 'POST',
+            body: JSON.stringify({ query: query.value }),
+        })
+        const data = await result.json()
+        queryResult.value = data
+
     } catch (error) {
         if (error instanceof BoardKitError) {
             // if it is just the file is not available...
@@ -123,6 +129,10 @@ const displayTitle = computed(() => {
 // configure the widget / chart based on the attributes.yaml
 // execute code from the sql file and render the result accordingly
 
+// 1. load the component based on the widget type
+// 2. supply the queryResult, attributes to the component
+// 3. use :is to render dynamically
+
 </script>
 
 <template>
@@ -142,6 +152,7 @@ const displayTitle = computed(() => {
 
     <slot />
     {{ props.widget }}
+    <!-- {{ queryResult }} -->
     <!-- span>{{ props.widget }} - layout file: {{ props.layoutFile }} => </span -->
 </div>
 </template>
