@@ -10,9 +10,10 @@
 
     <nav class="border-b px-4 py-3">
       <div class="flex gap-4">
-        <RouterLink to="/dashboard">
+        <!-- [note] as there is a breaking change in the BoardBarChart component, hence not showing this tab for the moment -->
+        <!-- RouterLink to="/dashboard">
           Dashboard
-        </RouterLink>
+        </RouterLink -->
         <RouterLink to="/dashboard-render-demo">
           Dashboard Render Demo
         </RouterLink>

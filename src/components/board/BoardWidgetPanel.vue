@@ -41,6 +41,8 @@ onMounted(async () => {
     // query.sql which is required
     try {
         query.value = await fetchFile(`${filePath.value}/query.sql`, 'sql')
+        // trigger QuickBoardServer to run the query
+        
     } catch (error) {
         if (error instanceof BoardKitError) {
             // if it is just the file is not available...
@@ -98,6 +100,23 @@ function validateAttributesContent(content: string, isEmpty: boolean = false) {
     }
     return result.data
 }
+
+function onWidgetEditClick() {
+    // [todo] really update the view to edit mode etc
+    alert(`widget edit clicked: ${props.widget.id}`);
+}
+
+// helper to display the title of the widget
+// if the attribute title is set, use it
+// otherwise use the widget id (though not expecting it to be null)
+const displayTitle = computed(() => {
+    const attributeTitle = attributes.value?.title ?? ''
+    if (attributeTitle.length > 0) {
+        return attributeTitle
+    }
+    return props.widget.id
+})
+
 // [todo]
 // - missing sql contents validation
 // [todo]
@@ -111,16 +130,19 @@ function validateAttributesContent(content: string, isEmpty: boolean = false) {
     <!-- top level menu-bar -->
     <div class="border-b border-gray-200 mb-2 flex max-h-32 items-center justify-between">
         <!-- Title -->
-        <div class="panel-menu-bar-title">{{ attributes?.title }}</div>
+        <div class="panel-menu-bar-title">{{ displayTitle }}</div>
 
         <!-- Window controls -->
         <div class="flex h-full items-center gap-1 px-1.5">
-            <button class="panel-menu-bar-icon">✎</button>
+            <button class="panel-menu-bar-icon" @click="onWidgetEditClick">✎</button>
         </div>
     </div>
 
-    <!-- span>{{ props.widget }} - layout file: {{ props.layoutFile }} => </span -->
+    <!-- main Component area -->
+
     <slot />
+    {{ props.widget }}
+    <!-- span>{{ props.widget }} - layout file: {{ props.layoutFile }} => </span -->
 </div>
 </template>
 

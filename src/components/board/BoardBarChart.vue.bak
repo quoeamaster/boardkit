@@ -27,12 +27,11 @@ const chartElement = ref<HTMLDivElement | null>(null)
 let chart: echarts.ECharts | null = null
 
 function renderChart() {
-  // [note] make sure the div holding the chart is available
   if (!chartElement.value) {
     return
   }
+
   if (!chart) {
-    // init the chart object (if the div container is available)
     chart = echarts.init(chartElement.value)
   }
 
@@ -89,7 +88,6 @@ const getChartInputs = () => [
 const updateChart = () => {
   renderChart()
 }
-
 watch(
   getChartInputs,
   updateChart,
@@ -97,7 +95,7 @@ watch(
     deep: true,
   },
 )
-// [note] another way to watch the inputs
+
 // watch(
 //   () => [
 //     props.labels,

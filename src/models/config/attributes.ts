@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const attributesSchema = z.object({
-  title: z.string().default("BoardKit"),
+  title: z.string().default(""),
 
   // defaults added
   style: z.object({
