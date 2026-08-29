@@ -8,8 +8,10 @@
 4. ✅ enhance the dashboard layout syntax; having rows and cols concept (width or smart-width like flex containers; final idea 12-col grid design instead)
 5. ✅ enhance the dashboard container widget (reference kibana, per widget has a common set of buttons like `_ ☐ ✗` buttons on top right)
 6. ✅ config file concept (poc)
--. ❌ parse the yaml (later on sql as well) yaml->parse()
--. ❌ introduce renderer concept...
+7. ✅ parse the yaml (later on sql as well) yaml->parse()
+8. ✅ integrate <component> with attributes and queried-data
+9. ✅ introduce renderer concept...
+
 -. ❌ add in attributes merge for component(s)
 -. ❌ notificationStore and drawer panel showing them
 -. ❌ logging notifictions back to QuickBoard Server (important for oTel)

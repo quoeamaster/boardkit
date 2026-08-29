@@ -8,6 +8,7 @@ import { attributesSchema } from '@/models/config/attributes'
 import type { Attributes } from '@/models/config/attributes'
 import { parse } from 'yaml'
 import type { QueryResponse } from '@/api/query/runQueryInterface'
+import { getComponent } from '@/registry/component-registry'
 
 interface Props {
     widget: GridWidget,
@@ -123,6 +124,16 @@ const displayTitle = computed(() => {
     return props.widget.id
 })
 
+// helper to return the correct component based on the widget name (really component and not the parent abstract type / struct)
+const component = computed(() => {
+    const component = getComponent(props.widget.name)
+    if (!component) {
+        console.error(`Component not found for widget type: ${props.widget.name}`)
+        return null
+    }
+    return component.component
+})
+
 // [todo]
 // - missing sql contents validation
 // [todo]
@@ -151,9 +162,15 @@ const displayTitle = computed(() => {
     <!-- main Component area -->
 
     <slot />
-    {{ props.widget }}
+    <!-- {{ props.widget }} -->
     <!-- {{ queryResult }} -->
     <!-- span>{{ props.widget }} - layout file: {{ props.layoutFile }} => </span -->
+
+    <component 
+        :is="component" 
+        :widget="props.widget" 
+        :attributes="attributes" 
+        :queryResult="queryResult ?? {}" />
 </div>
 </template>
 

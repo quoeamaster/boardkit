@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {
+  computed,
   nextTick,
   onBeforeUnmount,
   onMounted,
@@ -7,20 +8,31 @@ import {
   watch,
 } from 'vue'
 
+import type { GridWidget } from '@/models/widgets/grid-widget'
+import type { Attributes } from '@/models/config/attributes'
+import type { QueryResponse } from '@/api/query/runQueryInterface'
 import * as echarts from 'echarts'
 
 interface Props {
-  labels: string[]
-  values: number[]
-  title?: string
+  widget: GridWidget
+  attributes: Attributes
+  queryResult: QueryResponse
 }
 
-const props = withDefaults(
-  defineProps<Props>(),
-  {
-    title: '',
-  },
-)
+const props = defineProps<Props>()
+
+const resultLabels = computed(() => {
+  if (!props.queryResult.rows) {
+    return []
+  }
+  return props.queryResult.rows.map((row) => row.label)
+})
+const resultValues = computed(() => {
+  if (!props.queryResult.rows) {
+    return []
+  }
+  return props.queryResult.rows.map((row) => row.values)
+})
 
 const chartElement = ref<HTMLDivElement | null>(null)
 
@@ -39,7 +51,7 @@ function renderChart() {
   // [lesson] chance to merge attributes.yaml from customer project with the EChart
   chart.setOption({
     title: {
-      text: props.title,
+      text: props.attributes?.title ?? '',
     },
 
     tooltip: {
@@ -48,7 +60,7 @@ function renderChart() {
 
     xAxis: {
       type: 'category',
-      data: props.labels,
+      data: resultLabels.value ?? [],
     },
 
     yAxis: {
@@ -60,7 +72,7 @@ function renderChart() {
         // [lesson] the type is hard-coded here... bar(chart)
         // possible values: bar, line, pie, scatter, etc.
         type: 'bar',
-        data: props.values,
+        data: resultValues.value ?? [],
       },
     ],
   })
@@ -82,14 +94,18 @@ onMounted(async () => {
 })
 
 const getChartInputs = () => [
-  props.labels,
-  props.values,
-  props.title,
+  resultLabels.value,
+  resultValues.value,
+  props.queryResult,
+  props.attributes,
 ]
 const updateChart = () => {
   renderChart()
 }
 
+// [lesson] `chart` stays a plain let on purpose. The ECharts instance must not be
+// wrapped in a Vue proxy. Empty first paint is expected: queryResult arrives later
+// from BoardWidgetPanel. Re-render by watching that data, not by making `chart` a ref.
 watch(
   getChartInputs,
   updateChart,
@@ -97,20 +113,6 @@ watch(
     deep: true,
   },
 )
-// [note] another way to watch the inputs
-// watch(
-//   () => [
-//     props.labels,
-//     props.values,
-//     props.title,
-//   ],
-//   () => {
-//     renderChart()
-//   },
-//   {
-//     deep: true,
-//   },
-// )
 
 onBeforeUnmount(() => {
   window.removeEventListener(
@@ -128,4 +130,7 @@ onBeforeUnmount(() => {
     ref="chartElement"
     class="h-[320px] w-full"
   />
+  <!-- {{ queryResult.rows }} -->
+  <!-- {{ resultLabels }} --> 
+  <!-- {{ resultValues }} -->
 </template>
