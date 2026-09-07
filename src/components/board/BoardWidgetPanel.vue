@@ -78,7 +78,12 @@ onMounted(async () => {
                 attributes.value = validateAttributesContent('', true)
                 // console.log('attributes', attributes.value)
             } else {
-                console.error('Error fetching attributes.yaml (other errors)', error)
+                if (error.message.includes('404 Not Found')) {
+                    console.warn(`${filePath.value}/attributes.yaml not found: ${error}`)
+                } else {
+                    // anything else...
+                    console.error('Error fetching attributes.yaml (other errors)', error)
+                }
             }
         } else {
             console.error('Error fetching attributes.yaml (generic error)', error)

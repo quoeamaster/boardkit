@@ -170,4 +170,5 @@ onBeforeUnmount(() => {
   <!-- {{ queryResult.rows }} -->
   <!-- {{ resultLabels }} --> 
   <!-- {{ resultValues }} -->
+  <!-- {{ queryResult }} -->
 </template>

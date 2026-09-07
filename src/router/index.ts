@@ -7,7 +7,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/dashboard',
+      redirect: '/dashboard-render-demo',
     },
     {
       path: '/dashboard',
