@@ -70,13 +70,14 @@ onMounted(async () => {
         attributes.value = validateAttributesContent(content)
         //console.log('attributes', attributes.value)
     } catch (error) {
+        // attributes.yaml is optional -> use schema defaults
+        attributes.value = validateAttributesContent('', true)
+        
         if (error instanceof BoardKitError) {
             if (error.code === BoardKitErrorCode.FILE_NOT_FOUND) {
                 console.warn(
                     `${filePath.value}/attributes.yaml not found: ${error}`
                 )
-                // attributes.yaml is optional -> use schema defaults
-                attributes.value = validateAttributesContent('', true)
             } else {
                 console.error(
                     'Error fetching attributes.yaml (other errors)',
