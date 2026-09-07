@@ -31,7 +31,7 @@ const filePath = computed(() => {
         const layoutFile = props.layoutFile.replace('.json', '')
         widgetDefFolder = `${import.meta.env.BASE_URL}/${layoutFile}/`
     }
-    return `${widgetDefFolder}${props.widget.id}/`
+    return `${widgetDefFolder}/${props.widget.id}/`
 })
 
 const attributes = ref<Attributes | null>(null)
