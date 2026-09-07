@@ -72,23 +72,24 @@ onMounted(async () => {
     } catch (error) {
         if (error instanceof BoardKitError) {
             if (error.code === BoardKitErrorCode.FILE_NOT_FOUND) {
-                // [todo] move to notifications
-                console.warn(`${filePath.value}/attributes.yaml not found: ${error}`)
-                // use defaults instead of null
+                console.warn(
+                    `${filePath.value}/attributes.yaml not found: ${error}`
+                )
+                // attributes.yaml is optional -> use schema defaults
                 attributes.value = validateAttributesContent('', true)
-                // console.log('attributes', attributes.value)
             } else {
-                if (error.message.includes('404 Not Found')) {
-                    console.warn(`${filePath.value}/attributes.yaml not found: ${error}`)
-                } else {
-                    // anything else...
-                    console.error('Error fetching attributes.yaml (other errors)', error)
-                }
+                console.error(
+                    'Error fetching attributes.yaml (other errors)',
+                    error
+                )
             }
         } else {
-            console.error('Error fetching attributes.yaml (generic error)', error)
+            console.error(
+                'Error fetching attributes.yaml (generic error)',
+                error
+            )
         }
-    }
+    }    
 })
 
 // validate the attributes.yaml content
@@ -98,17 +99,26 @@ function validateAttributesContent(content: string, isEmpty: boolean = false) {
     const result = attributesSchema.safeParse(parsedContent)
 
     if (!result.success) {
-        console.log('result', result)
-        console.error(new BoardKitError(
-            BoardKitErrorCode.CONFIG_INVALID,
-            `Attributes content is invalid: ${content}; ${result}`,
-            {
-                widgetId: props.widget.id,
-                path: `${filePath.value}/attributes.yaml`,
-                status: 500,
-            }
-        ))
-        return null
+        //console.log('result', result)
+        console.warn(
+            `Invalid attributes.yaml for widget ${props.widget.id}; using defaults.`,
+            result.error
+        )
+        // fallback
+        const fallback = attributesSchema.safeParse({})
+        if (!fallback.success) {
+            // This means your schema itself is broken.
+            throw new BoardKitError(
+                BoardKitErrorCode.CONFIG_INVALID,
+                `Unable to generate default attributes: ${fallback.error}`,
+                {
+                    widgetId: props.widget.id,
+                    path: `${filePath.value}/attributes.yaml`,
+                    status: 500,
+                }
+            )
+        }
+        return fallback.data
     }
     return result.data
 }
