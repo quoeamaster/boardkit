@@ -11,8 +11,9 @@
 7. ✅ parse the yaml (later on sql as well) yaml->parse()
 8. ✅ integrate <component> with attributes and queried-data
 9. ✅ introduce renderer concept...
+10. ✅ add in attributes merge for component(s)
 
--. ❌ add in attributes merge for component(s)
+-. ❌ testing on other chart type(s) (e.g. pie)
 -. ❌ notificationStore and drawer panel showing them
 -. ❌ logging notifictions back to QuickBoard Server (important for oTel)
 

@@ -147,6 +147,7 @@ const component = computed(() => {
         console.error(`Component not found for widget type: ${props.widget.name}`)
         return null
     }
+    console.log('component', component)
     return component.component
 })
 
@@ -183,10 +184,12 @@ const component = computed(() => {
     <!-- span>{{ props.widget }} - layout file: {{ props.layoutFile }} => </span -->
 
     <component 
+        v-if="component"
         :is="component" 
         :widget="props.widget" 
         :attributes="attributes" 
         :queryResult="queryResult ?? {}" />
+    
 </div>
 </template>
 

@@ -1,0 +1,25 @@
+# attributes.yaml is OPTIONAL, default values are used if not provided
+
+# title of the chart
+# [tested]
+title: Sales in a PIE
+
+# style of the chart
+style:
+  # [tested] apply on axis level
+  textColorX: "#000022"
+  # [tested] apply on axis level
+  textColorY: "#893e3e"
+  # [tested] apply on axis level
+  textSize: "12px"
+  # [tested] the background color of the chart (not on the text label)
+  backgroundColor: "#ff0000"
+  
+# chart configuration
+chart:
+  xAxis:
+    # [tested]
+    field: "month"
+  yAxis:
+    # [tested]
+    field: "revenue"

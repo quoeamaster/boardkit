@@ -21,17 +21,14 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const resultLabels = computed(() => {
+const pieData = computed(() => {
   if (!props.queryResult.rows) {
     return []
   }
-  return props.queryResult.rows.map((row) => row.label)
-})
-const resultValues = computed(() => {
-  if (!props.queryResult.rows) {
-    return []
-  }
-  return props.queryResult.rows.map((row) => row.values)
+  return props.queryResult.rows.map((row) => ({
+    name: row.label,
+    value: row.values,
+  }))
 })
 
 const chartElement = ref<HTMLDivElement | null>(null)
@@ -56,51 +53,17 @@ function renderChart() {
       padding: [0, 0, 10, 0],
     },
 
-    // background color for the chart (whole widget wide)
-    //backgroundColor: props.attributes?.style?.backgroundColor ?? '#ffffff',
-
     textStyle: {
-      // color of the text (but might not work as expected, check the axis settings as well)
-      // use xAxis color if possible
-      color: props.attributes?.style?.textColorX ?? '#000000',  
+      color: props.attributes?.style?.textColorX ?? '#000000',
       // font weight like 'normal', 'bold', 'bolder', 'lighter'
       fontWeight: 'normal',
     },
 
     tooltip: {
-      // trigger the tooltip on hover over the axis
-      trigger: 'axis',
+      // trigger the tooltip on hover over a pie slice
+      trigger: 'item',
       // show the tooltip or not
       show: true,
-    },
-
-    xAxis: {
-      axisLabel: {
-        // the xAxis label color
-        color: props.attributes?.style?.textColorX ?? '#000000',
-        // the xAxis label font size
-        fontSize: props.attributes?.style?.textSize ?? '8px',
-      },
-      // [doc] https://echarts.apache.org/en/option.html#xAxis.type
-      // possible values: 'value', 'category', 'time', 'log'
-      type: 'category',
-      data: resultLabels.value ?? [],
-      // the xAxis field name
-      name: props.attributes?.chart?.xAxis?.field ?? '',
-    },
-
-    yAxis: {
-      axisLabel: {
-        // the yAxis label color
-        color: props.attributes?.style?.textColorY ?? '#000000',
-        // the yAxis label font size
-        fontSize: props.attributes?.style?.textSize ?? '8px',
-      },
-      // [doc] https://echarts.apache.org/en/option.html#xAxis.type
-      // possible values: 'value', 'category', 'time', 'log'
-      type: 'value',
-      // the yAxis field name
-      name: props.attributes?.chart?.yAxis?.field ?? '',
     },
 
     legend: {
@@ -110,12 +73,9 @@ function renderChart() {
     series: [
       {
         name: props.attributes?.chart?.yAxis?.field ?? '',
-        type: props.attributes?.chart?.type ?? 'bar',
-        data: resultValues.value ?? [],
-        itemStyle: {
-          // set the background color of the bars/ line
-          color: props.attributes?.style?.backgroundColor ?? '#000000',
-        },
+        // [hardcode] as easier to manage
+        type: 'pie', 
+        data: pieData.value ?? [],
       },
     ],
   })
@@ -137,8 +97,7 @@ onMounted(async () => {
 })
 
 const getChartInputs = () => [
-  resultLabels.value,
-  resultValues.value,
+  pieData.value,
   props.queryResult,
   props.attributes,
 ]
@@ -173,8 +132,4 @@ onBeforeUnmount(() => {
     ref="chartElement"
     class="min-h-[320px] w-full"
   />
-  <!-- {{ queryResult.rows }} -->
-  <!-- {{ resultLabels }} --> 
-  <!-- {{ resultValues }} -->
-  <!-- {{ queryResult }} -->
 </template>

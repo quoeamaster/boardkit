@@ -7,32 +7,32 @@
         "size_defaults": { "width": 3, "height": "small" },
         "rows": [
             {
-            "widgets": [
-                { "name": "barchart", "id": "revenue", "size": { "width": 3 } },
-                { "name": "barchart", "id": "orders", "size": { "width": 3, "height": "medium" } },
-                { "name": "barchart", "id": "customers", "size": { "height": "medium" } },
-                { "name": "barchart", "id": "margin" }
-            ]
+                "widgets": [
+                    { "name": "piechart", "id": "orders-table-sm", "size": { "width": 12 } }
+                ]
             },
             {
-            "widgets": [
-                { "name": "barchart", "id": "sales-chart", "size": { "width": 8, "height": "medium" } },
-                { "name": "barchart", "id": "top-products", "size": { "width": 4, "height": "small" } }
-            ]
+                "widgets": [
+                    { "name": "barchart", "id": "revenue", "size": { "width": 3 } },
+                    { "name": "linechart", "id": "orders", "size": { "width": 3, "height": "medium" } },
+                    { "name": "piechart", "id": "customers", "size": { "height": "medium" } },
+                    { "name": "barchart", "id": "margin" }
+                ]
             },
             {
-            "widgets": [
-                { "name": "barchart", "id": "orders-table", "size": { "width": 12, "height": "large" } }
-            ]
+                "widgets": [
+                    { "name": "barchart", "id": "sales-chart", "size": { "width": 8, "height": "medium" } },
+                    { "name": "barchart", "id": "top-products", "size": { "width": 4, "height": "small" } }
+                ]
             },
             {
-            "widgets": [
-                { "name": "barchart", "id": "orders-table-sm", "size": { "width": 12 } }
-            ]
+                "widgets": [
+                    { "name": "barchart", "id": "orders-table", "size": { "width": 12, "height": "large" } }
+                ]
             }
         ],
         "comments": [
-            "size_defaults: use these values if not provided in the widget definition",
+            "size_defaults: use these values if not provided in the widget definition (a 12 grid system)",
             "widgets: per widget definition, the size is optional (can inherit from size_defaults), hence the internal `width` and `height` properties are again optional",
             "version: related to the version / revision of the layout definition tracked by QuickBoard; essential for rollback to a specific version",
     

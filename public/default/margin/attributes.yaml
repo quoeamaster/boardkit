@@ -1,0 +1,9 @@
+# chart configuration
+chart:
+  type: "line"
+  xAxis:
+    field: "month"
+  yAxis:
+    field: "margin (in k)"
+
+title: "Margin (in k) for last Quarter"
