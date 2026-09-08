@@ -102,8 +102,13 @@ function renderChart() {
       name: props.attributes?.chart?.yAxis?.field ?? '',
     },
 
+    legend: {
+      show: true,
+    },
+
     series: [
       {
+        name: props.attributes?.chart?.yAxis?.field ?? '',
         type: props.attributes?.chart?.type ?? 'bar',
         data: resultValues.value ?? [],
         itemStyle: {

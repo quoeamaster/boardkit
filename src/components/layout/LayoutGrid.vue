@@ -38,8 +38,8 @@ const sizeWidthClasses: Record<NonNullable<GridSize['width']>, string> = {
 }
 // function to get the height classes based on the height value
 const sizeHeightClasses: Record<NonNullable<GridSize['height']>, string> = {
-    small: 'h-[120px]',
-    medium: 'h-[300px]',
+    small: 'h-[160px]',
+    medium: 'h-[380px]',
     large: 'h-[500px]',
 }
 

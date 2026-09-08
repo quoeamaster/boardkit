@@ -72,7 +72,7 @@ onMounted(async () => {
     } catch (error) {
         // attributes.yaml is optional -> use schema defaults
         attributes.value = validateAttributesContent('', true)
-        
+
         if (error instanceof BoardKitError) {
             if (error.code === BoardKitErrorCode.FILE_NOT_FOUND) {
                 console.warn(
@@ -163,7 +163,8 @@ const component = computed(() => {
 </script>
 
 <template>
-<div class="border p-2 m-0 h-full panel">
+<!-- [lesson] make it scrollable; hence even if the size of the grid is not good, it is ok to cover everything -->
+<div class="border p-2 m-0 h-full panel overflow-auto">
     <!-- top level menu-bar -->
     <div class="border-b border-gray-200 mb-2 flex max-h-32 items-center justify-between">
         <!-- Title -->
@@ -176,7 +177,6 @@ const component = computed(() => {
     </div>
 
     <!-- main Component area -->
-
     <slot />
     <!-- {{ props.widget }} -->
     <!-- {{ queryResult }} -->
