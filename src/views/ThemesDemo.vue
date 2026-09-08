@@ -245,7 +245,7 @@ const markdownContent = `
         <div class="flex items-center gap-4">
             <div class="w-40 text-right">markdown with provided content:</div>
             <div class="w-full">
-              <BoardMarkdown :content="markdownContent" />
+              <BoardMarkdown :childProps="{ content: markdownContent }" />
             </div>
         </div>
     </div>

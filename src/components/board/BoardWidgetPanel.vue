@@ -9,6 +9,7 @@ import type { Attributes } from '@/models/config/attributes'
 import { parse } from 'yaml'
 import type { QueryResponse } from '@/api/query/runQueryInterface'
 import { getComponent } from '@/registry/component-registry'
+import type { WidgetChildProps } from '@/models/widgets/child-props'
 
 interface Props {
     widget: GridWidget,
@@ -37,31 +38,51 @@ const filePath = computed(() => {
 const attributes = ref<Attributes | null>(null)
 const query = ref<unknown>(null)
 const queryResult = ref<QueryResponse | null>(null)
+const markdownContent = ref('')
 
 onMounted(async () => {
-    // query.sql which is required
-    try {
-        query.value = await fetchFile(`${filePath.value}/query.sql`, 'sql')
-        // trigger QuickBoardServer to run the query [the middleware is actually the same vue.js app -> /api/query]
-        const result = await fetch('/api/query', {
-            method: 'POST',
-            body: JSON.stringify({ query: query.value }),
-        })
-        const data = await result.json()
-        queryResult.value = data
+    const kind = getComponent(props.widget.name)?.kind ?? 'query'
 
-    } catch (error) {
-        if (error instanceof BoardKitError) {
-            // if it is just the file is not available...
-            if (error.code === BoardKitErrorCode.FILE_NOT_FOUND) {
-                // [todo] move to notifications
-                console.error(`${filePath.value}/query.sql not found: ${error}`)
-                query.value = null
+    if (kind === 'query') {
+        // query.sql which is required for query-backed widgets
+        try {
+            query.value = await fetchFile(`${filePath.value}/query.sql`, 'sql')
+            // trigger QuickBoardServer to run the query [the middleware is actually the same vue.js app -> /api/query]
+            const result = await fetch('/api/query', {
+                method: 'POST',
+                body: JSON.stringify({ query: query.value }),
+            })
+            const data = await result.json()
+            queryResult.value = data
+
+        } catch (error) {
+            if (error instanceof BoardKitError) {
+                // if it is just the file is not available...
+                if (error.code === BoardKitErrorCode.FILE_NOT_FOUND) {
+                    // [todo] move to notifications
+                    console.error(`${filePath.value}/query.sql not found: ${error}`)
+                    query.value = null
+                } else {
+                    console.error('Error fetching query.yaml (other errors)', error)
+                }
             } else {
-                console.error('Error fetching query.yaml (other errors)', error)
+                console.error('Error fetching query.sql (generic error)', error)
             }
-        } else {
-            console.error('Error fetching query.sql (generic error)', error)
+        }
+    } else if (kind === 'markdown') {
+        try {
+            markdownContent.value = await fetchFile(`${filePath.value}/content.md`, 'md')
+        } catch (error) {
+            markdownContent.value = ''
+            if (error instanceof BoardKitError) {
+                if (error.code === BoardKitErrorCode.FILE_NOT_FOUND) {
+                    console.warn(`${filePath.value}/content.md not found: ${error}`)
+                } else {
+                    console.error('Error fetching content.md (other errors)', error)
+                }
+            } else {
+                console.error('Error fetching content.md (generic error)', error)
+            }
         }
     }
     // attributes.yaml which can be optional
@@ -141,15 +162,23 @@ const displayTitle = computed(() => {
 })
 
 // helper to return the correct component based on the widget name (really component and not the parent abstract type / struct)
-const component = computed(() => {
-    const component = getComponent(props.widget.name)
-    if (!component) {
+const definition = computed(() => {
+    const resolved = getComponent(props.widget.name)
+    if (!resolved) {
         console.error(`Component not found for widget type: ${props.widget.name}`)
         return null
     }
-    console.log('component', component)
-    return component.component
+    return resolved
 })
+
+const component = computed(() => definition.value?.component ?? null)
+
+const childProps = computed<WidgetChildProps>(() => ({
+    widget: props.widget,
+    attributes: attributes.value,
+    queryResult: queryResult.value ?? {},
+    content: markdownContent.value,
+}))
 
 // [todo]
 // - missing sql contents validation
@@ -157,8 +186,8 @@ const component = computed(() => {
 // configure the widget / chart based on the attributes.yaml
 // execute code from the sql file and render the result accordingly
 
-// 1. load the component based on the widget type
-// 2. supply the queryResult, attributes to the component
+// 1. load the component based on the widget type / kind
+// 2. supply a childProps map; each widget extracts the keys it needs
 // 3. use :is to render dynamically
 
 </script>
@@ -186,9 +215,7 @@ const component = computed(() => {
     <component 
         v-if="component"
         :is="component" 
-        :widget="props.widget" 
-        :attributes="attributes" 
-        :queryResult="queryResult ?? {}" />
+        :childProps="childProps" />
     
 </div>
 </template>

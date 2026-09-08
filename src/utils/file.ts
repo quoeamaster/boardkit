@@ -1,6 +1,6 @@
 import { BoardKitError, BoardKitErrorCode } from '@/error/errors'
 
-export async function fetchFile(path: string, type: 'json' | 'yaml' | 'sql') {
+export async function fetchFile(path: string, type: 'json' | 'yaml' | 'sql' | 'md') {
     const response = await fetch(path)
     if (!response.ok) {
         throw new BoardKitError(BoardKitErrorCode.FILE_FETCH_FAILED, 
@@ -14,7 +14,7 @@ export async function fetchFile(path: string, type: 'json' | 'yaml' | 'sql') {
     // return the file contents based on type value
     if (type === 'json') {
         return response.json()
-    } else if (type === 'yaml' || type === 'sql') {
+    } else if (type === 'yaml' || type === 'sql' || type === 'md') {
         const content = await response.text()
         if (content.startsWith('<!doctype html>')) {
             // most likely not found or a html file (not expected)

@@ -46,7 +46,7 @@ describe('BoardPieChart', () => {
 
   it('renders a pie series from query row labels and values', async () => {
     mount(BoardPieChart, {
-      props: { widget, attributes, queryResult },
+      props: { childProps: { widget, attributes, queryResult } },
     })
 
     await nextTick()

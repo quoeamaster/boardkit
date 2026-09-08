@@ -8,24 +8,21 @@ import {
   watch,
 } from 'vue'
 
-import type { GridWidget } from '@/models/widgets/grid-widget'
-import type { Attributes } from '@/models/config/attributes'
-import type { QueryResponse } from '@/api/query/runQueryInterface'
+import type { WidgetChildProps } from '@/models/widgets/child-props'
 import * as echarts from 'echarts'
 
 interface Props {
-  widget: GridWidget
-  attributes: Attributes
-  queryResult: QueryResponse
+  childProps: WidgetChildProps
 }
 
 const props = defineProps<Props>()
 
 const pieData = computed(() => {
-  if (!props.queryResult.rows) {
+  const rows = props.childProps.queryResult?.rows
+  if (!rows) {
     return []
   }
-  return props.queryResult.rows.map((row) => ({
+  return rows.map((row) => ({
     name: row.label,
     value: row.values,
   }))
@@ -49,12 +46,12 @@ function renderChart() {
   chart.setOption({
     title: {
       // the title / label for the chart; return '' blank line if not provided
-      text: props.attributes?.title ?? '',
+      text: props.childProps.attributes?.title ?? '',
       padding: [0, 0, 10, 0],
     },
 
     textStyle: {
-      color: props.attributes?.style?.textColorX ?? '#000000',
+      color: props.childProps.attributes?.style?.textColorX ?? '#000000',
       // font weight like 'normal', 'bold', 'bolder', 'lighter'
       fontWeight: 'normal',
     },
@@ -72,7 +69,7 @@ function renderChart() {
 
     series: [
       {
-        name: props.attributes?.chart?.yAxis?.field ?? '',
+        name: props.childProps.attributes?.chart?.yAxis?.field ?? '',
         // [hardcode] as easier to manage
         type: 'pie', 
         data: pieData.value ?? [],
@@ -98,8 +95,8 @@ onMounted(async () => {
 
 const getChartInputs = () => [
   pieData.value,
-  props.queryResult,
-  props.attributes,
+  props.childProps.queryResult,
+  props.childProps.attributes,
 ]
 const updateChart = () => {
   renderChart()

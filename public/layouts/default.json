@@ -8,7 +8,7 @@
         "rows": [
             {
                 "widgets": [
-                    { "name": "piechart", "id": "orders-table-sm", "size": { "width": 12 } }
+                    { "name": "markdown", "id": "orders-table-sm", "size": { "width": 12 } }
                 ]
             },
             {

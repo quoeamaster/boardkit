@@ -8,30 +8,28 @@ import {
   watch,
 } from 'vue'
 
-import type { GridWidget } from '@/models/widgets/grid-widget'
-import type { Attributes } from '@/models/config/attributes'
-import type { QueryResponse } from '@/api/query/runQueryInterface'
+import type { WidgetChildProps } from '@/models/widgets/child-props'
 import * as echarts from 'echarts'
 
 interface Props {
-  widget: GridWidget
-  attributes: Attributes
-  queryResult: QueryResponse
+  childProps: WidgetChildProps
 }
 
 const props = defineProps<Props>()
 
 const resultLabels = computed(() => {
-  if (!props.queryResult.rows) {
+  const rows = props.childProps.queryResult?.rows
+  if (!rows) {
     return []
   }
-  return props.queryResult.rows.map((row) => row.label)
+  return rows.map((row) => row.label)
 })
 const resultValues = computed(() => {
-  if (!props.queryResult.rows) {
+  const rows = props.childProps.queryResult?.rows
+  if (!rows) {
     return []
   }
-  return props.queryResult.rows.map((row) => row.values)
+  return rows.map((row) => row.values)
 })
 
 const chartElement = ref<HTMLDivElement | null>(null)
@@ -52,17 +50,17 @@ function renderChart() {
   chart.setOption({
     title: {
       // the title / label for the chart; return '' blank line if not provided
-      text: props.attributes?.title ?? '',
+      text: props.childProps.attributes?.title ?? '',
       padding: [0, 0, 10, 0],
     },
 
     // background color for the chart (whole widget wide)
-    //backgroundColor: props.attributes?.style?.backgroundColor ?? '#ffffff',
+    //backgroundColor: props.childProps.attributes?.style?.backgroundColor ?? '#ffffff',
 
     textStyle: {
       // color of the text (but might not work as expected, check the axis settings as well)
       // use xAxis color if possible
-      color: props.attributes?.style?.textColorX ?? '#000000',  
+      color: props.childProps.attributes?.style?.textColorX ?? '#000000',  
       // font weight like 'normal', 'bold', 'bolder', 'lighter'
       fontWeight: 'normal',
     },
@@ -77,30 +75,30 @@ function renderChart() {
     xAxis: {
       axisLabel: {
         // the xAxis label color
-        color: props.attributes?.style?.textColorX ?? '#000000',
+        color: props.childProps.attributes?.style?.textColorX ?? '#000000',
         // the xAxis label font size
-        fontSize: props.attributes?.style?.textSize ?? '8px',
+        fontSize: props.childProps.attributes?.style?.textSize ?? '8px',
       },
       // [doc] https://echarts.apache.org/en/option.html#xAxis.type
       // possible values: 'value', 'category', 'time', 'log'
       type: 'category',
       data: resultLabels.value ?? [],
       // the xAxis field name
-      name: props.attributes?.chart?.xAxis?.field ?? '',
+      name: props.childProps.attributes?.chart?.xAxis?.field ?? '',
     },
 
     yAxis: {
       axisLabel: {
         // the yAxis label color
-        color: props.attributes?.style?.textColorY ?? '#000000',
+        color: props.childProps.attributes?.style?.textColorY ?? '#000000',
         // the yAxis label font size
-        fontSize: props.attributes?.style?.textSize ?? '8px',
+        fontSize: props.childProps.attributes?.style?.textSize ?? '8px',
       },
       // [doc] https://echarts.apache.org/en/option.html#xAxis.type
       // possible values: 'value', 'category', 'time', 'log'
       type: 'value',
       // the yAxis field name
-      name: props.attributes?.chart?.yAxis?.field ?? '',
+      name: props.childProps.attributes?.chart?.yAxis?.field ?? '',
     },
 
     legend: {
@@ -109,12 +107,12 @@ function renderChart() {
 
     series: [
       {
-        name: props.attributes?.chart?.yAxis?.field ?? '',
-        type: props.attributes?.chart?.type ?? 'bar',
+        name: props.childProps.attributes?.chart?.yAxis?.field ?? '',
+        type: props.childProps.attributes?.chart?.type ?? 'bar',
         data: resultValues.value ?? [],
         itemStyle: {
           // set the background color of the bars/ line
-          color: props.attributes?.style?.backgroundColor ?? '#000000',
+          color: props.childProps.attributes?.style?.backgroundColor ?? '#000000',
         },
       },
     ],
@@ -139,8 +137,8 @@ onMounted(async () => {
 const getChartInputs = () => [
   resultLabels.value,
   resultValues.value,
-  props.queryResult,
-  props.attributes,
+  props.childProps.queryResult,
+  props.childProps.attributes,
 ]
 const updateChart = () => {
   renderChart()

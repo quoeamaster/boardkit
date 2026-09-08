@@ -1,14 +1,11 @@
 <script setup lang="ts">
 import MarkdownIt from 'markdown-it'
+import type { WidgetChildProps } from '@/models/widgets/child-props'
 
 interface Props {
-  content: string
+  childProps: WidgetChildProps
 }
 
-// [lesson] if no need to provide init value
-// const props = withDefaults(defineProps<Props>(), {
-//   content: '## this is a markdown componnet, feel free to provide contents',
-// })
 const props = defineProps<Props>()
 
 const markdown = new MarkdownIt({
@@ -25,7 +22,7 @@ function renderMarkdown(content: string): string {
 <template>
   <div
     class="markdown prose max-w-none"
-    v-html="renderMarkdown(props.content)"
+    v-html="renderMarkdown(props.childProps.content ?? '')"
   />
 </template>
 

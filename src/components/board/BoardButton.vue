@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+import type { WidgetChildProps } from '@/models/widgets/child-props'
+
 interface Props {
   disabled?: boolean
   type?: 'button' | 'submit' | 'reset'
   variant?: 'primary' | 'danger' | 'success' | 'ghost'
   size?: 'sm' | 'md' | 'lg'
+  childProps?: WidgetChildProps
 }
 
 const props = withDefaults(defineProps<Props>(), {

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import type { WidgetChildProps } from '@/models/widgets/child-props'
 
 interface Option {
   value: string
@@ -12,6 +13,7 @@ interface Props {
   placeholder?: string
   disabled?: boolean
   size?: 'sm' | 'md' | 'lg'
+  childProps?: WidgetChildProps
 }
 
 const props = withDefaults(
