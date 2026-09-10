@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { useNotificationStore } from '@/stores/notification'
+
+const notificationStore = useNotificationStore()
+
 </script>
 
 <template>
@@ -9,7 +13,8 @@
       color: var(--bk-color-text); ">
 
     <nav class="border-b px-4 py-3">
-      <div class="flex gap-4">
+      <div class="flex justify-between items-center gap-4">
+        <div class="flex gap-4">
         <!-- [note] as there is a breaking change in the BoardBarChart component, hence not showing this tab for the moment -->
         <!-- RouterLink to="/dashboard">
           Dashboard
@@ -25,8 +30,18 @@
         <RouterLink to="/components-demo">
           Components Demo
         </RouterLink>
-      </div>
+        </div>
 
+        <!-- Right side: Icons -->
+        <div class="flex items-center gap-3">
+          <!-- Place your icon components or SVGs here -->
+          <!-- button class="p-1 hover:bg-gray-100 rounded">🔍</button>
+          <button class="p-1 hover:bg-gray-100 rounded">⚙️</button -->
+            
+          {{ notificationStore.getItemsCount }}
+
+        </div>        
+      </div>
     </nav>
 
     <main class="p-6">
