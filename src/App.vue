@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useNotificationStore } from '@/stores/notification'
+import BoardBadge from '@/components/board/BoardBadge.vue'
 
 const notificationStore = useNotificationStore()
 
@@ -37,8 +38,9 @@ const notificationStore = useNotificationStore()
           <!-- Place your icon components or SVGs here -->
           <!-- button class="p-1 hover:bg-gray-100 rounded">🔍</button>
           <button class="p-1 hover:bg-gray-100 rounded">⚙️</button -->
-            
-          {{ notificationStore.getItemsCount }}
+
+          <BoardBadge badgeGlyph="🔔" />
+          <!-- {{ notificationStore.getIsDrawerOpen }} - {{ notificationStore.getItemsCount }} -->
 
         </div>        
       </div>

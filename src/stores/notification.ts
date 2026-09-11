@@ -7,7 +7,7 @@ export const useNotificationStore = defineStore('notification', {
         items: null as Notification[] | null,
 
         // determine if the drawer UI should be shown or not
-        isDrawerOpen: false,
+        isDrawerOpen: false as boolean | false,
     }),
 
     // for
@@ -27,6 +27,7 @@ export const useNotificationStore = defineStore('notification', {
         getWarnAndErrorItemsCount: (state): number => {
             return (state.items ?? []).filter(item => item.level === 'warning' || item.level === 'error').length
         },
+        getIsDrawerOpen: (state): boolean => state.isDrawerOpen,
     },
 
     // for 
@@ -41,6 +42,10 @@ export const useNotificationStore = defineStore('notification', {
         // so it is more into all-or-nothing approach.
         clearItems() {
             this.items = null
+        },
+        // toggle the drawer UI state - isDrawerOpen
+        toggleDrawer() {
+            this.isDrawerOpen = !this.isDrawerOpen
         },
     },
 })
