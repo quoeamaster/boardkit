@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useNotificationStore } from '@/stores/notification'
 import BoardBadge from '@/components/board/BoardBadge.vue'
+import BoardNotficationDrawer from '@/components/board/BoardNotficationDrawer.vue'
 
 const notificationStore = useNotificationStore()
 
@@ -13,7 +14,10 @@ const notificationStore = useNotificationStore()
       background: var(--bk-color-background); 
       color: var(--bk-color-text); ">
 
-    <nav class="border-b px-4 py-3">
+    <nav class="border-b px-4 py-3 
+      fixed w-full h-16
+      bg-white z-20"
+    >
       <div class="flex justify-between items-center gap-4">
         <div class="flex gap-4">
         <!-- [note] as there is a breaking change in the BoardBarChart component, hence not showing this tab for the moment -->
@@ -47,8 +51,11 @@ const notificationStore = useNotificationStore()
     </nav>
 
     <main class="p-6">
-      <!-- [lesson] the view to be rendered based on the router's current path -->
-      <RouterView />
+      <div class="overflow-y-auto mt-16">
+        <!-- [lesson] the view to be rendered based on the router's current path -->
+        <RouterView />
+        <BoardNotficationDrawer />
+      </div>
     </main>
   </div>
 </template>
