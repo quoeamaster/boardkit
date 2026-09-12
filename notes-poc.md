@@ -2,20 +2,21 @@
 
 ## list of POC(s)
 
-1. ✅ test basic tailwindcss and echarts and vue integration
-2. ✅ add in dynamic layout.json loading (/public/layouts/default.json)
-3. ✅ based on layout.json, dynamically render the dashboard components 1 by 1 (now is hard-coded)
-4. ✅ enhance the dashboard layout syntax; having rows and cols concept (width or smart-width like flex containers; final idea 12-col grid design instead)
-5. ✅ enhance the dashboard container widget (reference kibana, per widget has a common set of buttons like `_ ☐ ✗` buttons on top right)
-6. ✅ config file concept (poc)
-7. ✅ parse the yaml (later on sql as well) yaml->parse()
-8. ✅ integrate <component> with attributes and queried-data
-9. ✅ introduce renderer concept...
+01. ✅ test basic tailwindcss and echarts and vue integration
+02. ✅ add in dynamic layout.json loading (/public/layouts/default.json)
+03. ✅ based on layout.json, dynamically render the dashboard components 1 by 1 (now is hard-coded)
+04. ✅ enhance the dashboard layout syntax; having rows and cols concept (width or smart-width like flex containers; final idea 12-col grid design instead)
+05. ✅ enhance the dashboard container widget (reference kibana, per widget has a common set of buttons like `_ ☐ ✗` buttons on top right)
+06. ✅ config file concept (poc)
+07. ✅ parse the yaml (later on sql as well) yaml->parse()
+08. ✅ integrate <component> with attributes and queried-data
+09. ✅ introduce renderer concept...
 10. ✅ add in attributes merge for component(s)
+11. ✅ notificationStore and drawer panel showing them
 
--. ❌ testing on other chart type(s) (e.g. pie)
--. ❌ notificationStore and drawer panel showing them
 -. ❌ logging notifictions back to QuickBoard Server (important for oTel)
+-. ❌ testing on other chart type(s) (e.g. pie)
+
 
 ## (done) suggested layout
 ```bash

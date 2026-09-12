@@ -10,6 +10,8 @@ import { parse } from 'yaml'
 import type { QueryResponse } from '@/api/query/runQueryInterface'
 import { getComponent } from '@/registry/component-registry'
 import type { WidgetChildProps } from '@/models/widgets/child-props'
+import { useNotificationStore } from '@/stores/notification'
+import { NotificationSchema, NotificationLevel } from '@/models/notification/notification'
 
 interface Props {
     widget: GridWidget,
@@ -17,6 +19,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const notificationsStore = useNotificationStore()
 
 // helper function to get the file path for the widget
 // if configStore.getWidgetDefinitionsFolder is set
@@ -76,7 +79,14 @@ onMounted(async () => {
             markdownContent.value = ''
             if (error instanceof BoardKitError) {
                 if (error.code === BoardKitErrorCode.FILE_NOT_FOUND) {
-                    console.warn(`${filePath.value}/content.md not found: ${error}`)
+                    notificationsStore.addItem(NotificationSchema.parse({
+                        time: new Date().toISOString(),
+                        level: NotificationLevel.enum.warning,
+                        message: `${filePath.value}/content.md not found: ${error}`,
+                        details: error.message,
+                        isRead: false,
+                    }))
+                    //console.warn(`${filePath.value}/content.md not found: ${error}`)
                 } else {
                     console.error('Error fetching content.md (other errors)', error)
                 }
@@ -96,9 +106,14 @@ onMounted(async () => {
 
         if (error instanceof BoardKitError) {
             if (error.code === BoardKitErrorCode.FILE_NOT_FOUND) {
-                console.warn(
-                    `${filePath.value}/attributes.yaml not found: ${error}`
-                )
+                notificationsStore.addItem(NotificationSchema.parse({
+                    time: new Date().toISOString(),
+                    level: NotificationLevel.enum.warning,
+                    message: `${filePath.value}/attributes.yaml not found: ${error}`,
+                    details: error.message,
+                    isRead: false,
+                }))
+                //console.warn(`${filePath.value}/attributes.yaml not found: ${error}`)
             } else {
                 console.error(
                     'Error fetching attributes.yaml (other errors)',

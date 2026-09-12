@@ -4,7 +4,7 @@ import type { Notification } from '@/models/notification/notification'
 export const useNotificationStore = defineStore('notification', {
     state: () => ({
         // list of notification items
-        items: null as Notification[] | null,
+        items: [] as Notification[],
 
         // determine if the drawer UI should be shown or not
         isDrawerOpen: false as boolean | false,
@@ -41,7 +41,7 @@ export const useNotificationStore = defineStore('notification', {
         // remove everything. It would not make sense to remove individual items as that already break integrity; 
         // so it is more into all-or-nothing approach.
         clearItems() {
-            this.items = null
+            this.items = [] as Notification[]
         },
         // toggle the drawer UI state - isDrawerOpen
         toggleDrawer() {

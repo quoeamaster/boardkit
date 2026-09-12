@@ -1,10 +1,6 @@
 <script setup lang="ts">
-import { useNotificationStore } from '@/stores/notification'
 import BoardBadge from '@/components/board/BoardBadge.vue'
 import BoardNotficationDrawer from '@/components/board/BoardNotficationDrawer.vue'
-
-const notificationStore = useNotificationStore()
-
 </script>
 
 <template>
