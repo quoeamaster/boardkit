@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useNotificationStore } from '@/stores/notification'
+import BoardNotificationDrawerItem from './BoardNotificationDrawerItem.vue'
 
 const notificationStore = useNotificationStore()
 
@@ -37,16 +38,23 @@ const handlerToggleDrawerOpenState = () => {
                     Notifications
                 </h2>
                 <button
-                    class="rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                    class="rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-700 cursor-pointer"
                     @click="handlerToggleDrawerOpenState"
                     aria-label="Close notifications"
                 >✕</button>
         </header>
 
         <!-- Notification list -->
-        <!-- [todo] add back the visual presentations for each notification item -->
         <div class="flex-1 overflow-y-auto">
-            {{ notificationStore.getItems }}
+            <div v-if="notificationStore.getItems.length === 0">
+                <p class="text-gray-500 text-[20px] text-center pt-20 cursor-pointer" 
+                    @click="handlerToggleDrawerOpenState"
+                >👏 Hooray~ All Clean 👏</p>
+            </div>
+            <BoardNotificationDrawerItem v-for="(item, index) in notificationStore.getItems" 
+                :key="index" 
+                :item="item" 
+                :index="index" />
         </div>
     </aside> 
 </template>

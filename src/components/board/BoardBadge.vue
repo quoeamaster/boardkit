@@ -15,11 +15,12 @@ const notificationCount = computed(() => {
 </script>
 
 <template>
+<!-- used to be disabled when no notifications -->
+<!-- :disabled="notificationCount === 0" --> 
 <button
   class="relative rounded-md p-2 text-gray-600 hover:bg-gray-100 cursor-pointer 
     disabled:opacity-50 disabled:cursor-not-allowed"
-  :disabled="notificationCount === 0"
-  @click="notificationStore.toggleDrawer()"
+    @click="notificationStore.toggleDrawer()"
 >
   <!-- <Bell class="h-5 w-5" /> 
   🔔 << avoid hard-code the "bell" glyph; can always replace by font-awesome etc 

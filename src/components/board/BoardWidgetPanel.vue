@@ -63,13 +63,31 @@ onMounted(async () => {
                 // if it is just the file is not available...
                 if (error.code === BoardKitErrorCode.FILE_NOT_FOUND) {
                     // [todo] move to notifications
-                    console.error(`${filePath.value}/query.sql not found: ${error}`)
+                    notificationsStore.addItem(NotificationSchema.parse({
+                        time: new Date().toISOString(),
+                        level: NotificationLevel.enum.error,
+                        message: `${filePath.value}/query.sql not found: ${error}`,
+                        details: error.message,
+                        isRead: false,
+                    }))
                     query.value = null
                 } else {
-                    console.error('Error fetching query.yaml (other errors)', error)
+                    notificationsStore.addItem(NotificationSchema.parse({
+                        time: new Date().toISOString(),
+                        level: NotificationLevel.enum.error,
+                        message: `Error fetching query.yaml (other errors): ${error}`,
+                        details: error.message,
+                        isRead: false,
+                    }))
                 }
             } else {
-                console.error('Error fetching query.sql (generic error)', error)
+                notificationsStore.addItem(NotificationSchema.parse({
+                    time: new Date().toISOString(),
+                    level: NotificationLevel.enum.error,
+                    message: `Error fetching query.sql (generic error): ${error}`,
+                    details: `${error}`,
+                    isRead: false,
+                }))
             }
         }
     } else if (kind === 'markdown') {
@@ -86,12 +104,23 @@ onMounted(async () => {
                         details: error.message,
                         isRead: false,
                     }))
-                    //console.warn(`${filePath.value}/content.md not found: ${error}`)
                 } else {
-                    console.error('Error fetching content.md (other errors)', error)
+                    notificationsStore.addItem(NotificationSchema.parse({
+                        time: new Date().toISOString(),
+                        level: NotificationLevel.enum.error,
+                        message: `Error fetching content.md (other errors): ${error}`,
+                        details: `${error}`,
+                        isRead: false,
+                    }))
                 }
             } else {
-                console.error('Error fetching content.md (generic error)', error)
+                notificationsStore.addItem(NotificationSchema.parse({
+                    time: new Date().toISOString(),
+                    level: NotificationLevel.enum.error,
+                    message: `Error fetching content.md (generic error): ${error}`,
+                    details: `${error}`,
+                    isRead: false,
+                }))
             }
         }
     }
@@ -113,18 +142,23 @@ onMounted(async () => {
                     details: error.message,
                     isRead: false,
                 }))
-                //console.warn(`${filePath.value}/attributes.yaml not found: ${error}`)
             } else {
-                console.error(
-                    'Error fetching attributes.yaml (other errors)',
-                    error
-                )
+                notificationsStore.addItem(NotificationSchema.parse({
+                    time: new Date().toISOString(),
+                    level: NotificationLevel.enum.error,
+                    message: `Error fetching attributes.yaml (other errors): ${error}`,
+                    details: `${error}`,
+                    isRead: false,
+                }))
             }
         } else {
-            console.error(
-                'Error fetching attributes.yaml (generic error)',
-                error
-            )
+            notificationsStore.addItem(NotificationSchema.parse({
+                time: new Date().toISOString(),
+                level: NotificationLevel.enum.error,
+                message: `Error fetching attributes.yaml (generic error): ${error}`,
+                details: `${error}`,
+                isRead: false,
+            }))
         }
     }    
 })
@@ -136,11 +170,13 @@ function validateAttributesContent(content: string, isEmpty: boolean = false) {
     const result = attributesSchema.safeParse(parsedContent)
 
     if (!result.success) {
-        //console.log('result', result)
-        console.warn(
-            `Invalid attributes.yaml for widget ${props.widget.id}; using defaults.`,
-            result.error
-        )
+        notificationsStore.addItem(NotificationSchema.parse({
+            time: new Date().toISOString(),
+            level: NotificationLevel.enum.info,
+            message: `Invalid attributes.yaml for widget ${props.widget.id}; using defaults.`,
+            details: result.error.message,
+            isRead: false,
+        }))
         // fallback
         const fallback = attributesSchema.safeParse({})
         if (!fallback.success) {
@@ -180,7 +216,14 @@ const displayTitle = computed(() => {
 const definition = computed(() => {
     const resolved = getComponent(props.widget.name)
     if (!resolved) {
-        console.error(`Component not found for widget type: ${props.widget.name}`)
+        notificationsStore.addItem(NotificationSchema.parse({
+            time: new Date().toISOString(),
+            level: NotificationLevel.enum.error,
+            message: `Component not found for widget type: ${props.widget.name}`,
+            details: `${props.widget.name}`,
+            isRead: false,
+        }))
+        //console.error(`Component not found for widget type: ${props.widget.name}`)
         return null
     }
     return resolved
@@ -194,16 +237,6 @@ const childProps = computed<WidgetChildProps>(() => ({
     queryResult: queryResult.value ?? {},
     content: markdownContent.value,
 }))
-
-// [todo]
-// - missing sql contents validation
-// [todo]
-// configure the widget / chart based on the attributes.yaml
-// execute code from the sql file and render the result accordingly
-
-// 1. load the component based on the widget type / kind
-// 2. supply a childProps map; each widget extracts the keys it needs
-// 3. use :is to render dynamically
 
 </script>
 
