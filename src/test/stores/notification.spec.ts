@@ -8,21 +8,28 @@ describe('useNotificationStore', () => {
     setActivePinia(createPinia())
   })
 
-  it('reads reversed items through getItemByIndex via getItems', () => {
+  it('keeps items in time-ascending order through getItems and getItemByIndex', () => {
     const store = useNotificationStore()
-    store.items = [
-      NotificationSchema.parse({
-        message: 'older',
-        time: '2026-01-01T00:00:00+00:00',
-      }),
+
+    store.addItem(
       NotificationSchema.parse({
         message: 'newer',
         time: '2026-02-01T00:00:00+00:00',
       }),
-    ]
+    )
+    store.addItem(
+      NotificationSchema.parse({
+        message: 'older',
+        time: '2026-01-01T00:00:00+00:00',
+      }),
+    )
 
-    expect(store.getItems[0]?.message).toBe('newer')
-    expect(store.getItemByIndex(0)?.message).toBe('newer')
+    expect(store.getItems.map((item) => item.message)).toEqual([
+      'older',
+      'newer',
+    ])
+    expect(store.getItemByIndex(0)?.message).toBe('older')
+    expect(store.getItemByIndex(1)?.message).toBe('newer')
     expect(store.getItemByIndex(99)).toBeNull()
   })
 })
