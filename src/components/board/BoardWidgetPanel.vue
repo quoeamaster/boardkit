@@ -45,6 +45,13 @@ const markdownContent = ref('')
 
 onMounted(async () => {
     const kind = getComponent(props.widget.name)?.kind ?? 'query'
+    // notificationsStore.addItem(NotificationSchema.parse({
+    //     time: new Date().toISOString(),
+    //     level: NotificationLevel.enum.error,
+    //     message: `testing purpose~`,
+    //     details: `there is nothing wrong, just for testing purposes`,
+    //     isRead: false,
+    // }))
 
     if (kind === 'query') {
         // query.sql which is required for query-backed widgets
@@ -93,6 +100,14 @@ onMounted(async () => {
     } else if (kind === 'markdown') {
         try {
             markdownContent.value = await fetchFile(`${filePath.value}/content.md`, 'md')
+            notificationsStore.addItem(NotificationSchema.parse({
+                time: new Date().toISOString(),
+                level: NotificationLevel.enum.info,
+                message: `Content.md fetched successfully for widget ${props.widget.id}`,
+                //details: markdownContent.value, // inappropriate would say...
+                details: `cotent loaded with length: ${markdownContent.value.length}`,
+                isRead: false,
+            }))
         } catch (error) {
             markdownContent.value = ''
             if (error instanceof BoardKitError) {
