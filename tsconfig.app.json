@@ -5,9 +5,10 @@
     "types": ["vite/client"],
     "allowArbitraryExtensions": true,
     "paths": {
-      // alias for the src directory
-      // this allows us to use @ in the src directory
-      "@/*": ["./src/*"]
+      // alias for the dashboard app
+      // this allows us to use @ in src/dashboard
+      "@/*": ["./src/dashboard/*"],
+      "@admin/*": ["./src/admin/*"]
     },
 
     /* Linting */
