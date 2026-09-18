@@ -13,9 +13,19 @@
 09. ✅ introduce renderer concept...
 10. ✅ add in attributes merge for component(s)
 11. ✅ notificationStore and drawer panel showing them
+12. ✅ logging notifictions back to QuickBoard Server (important for oTel)
 
--. ❌ logging notifictions back to QuickBoard Server (important for oTel)
--. ❌ testing on other chart type(s) (e.g. pie)
+- ❌ test on rebuilding a reference dashboard (from a website's outlook etc)
+- ❌ design what the app should really look like...
+- ❌ integrate with the server side app (protocols - http/restful, format - json, JWT???)
+
+## to be detailed
+currently, a few components are available
+- pie chart
+- line / bar chart
+- markdown
+- ❌ testing on other chart type(s) (e.g. stacked bar charts, data-tables)
+
 
 
 ## (done) suggested layout
