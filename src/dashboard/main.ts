@@ -22,6 +22,10 @@ const pinia = createPinia()
 const configStore = useConfigStore(pinia)
 await configStore.load(`${import.meta.env.BASE_URL}/${import.meta.env.VITE_CONFIG_FILE_LOCATION}`)
 
+// update render-file in the config store
+const queryString = new URLSearchParams(window.location.search);
+configStore.setRenderFile(queryString.get('config-file') ?? '');
+
 // [example] accessing the store
 // console.log(configStore.getConfig)
 // console.log(configStore.getLayoutFolder)

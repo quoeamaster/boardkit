@@ -14,6 +14,7 @@
 10. ✅ add in attributes merge for component(s)
 11. ✅ notificationStore and drawer panel showing them
 12. ✅ logging notifictions back to QuickBoard Server (important for oTel)
+13. ✅ splitting into 2 logical apps under 1 vue.js project (/admin and /dashboard)
 
 - ❌ test on rebuilding a reference dashboard (from a website's outlook etc)
 - ❌ design what the app should really look like...

@@ -13,6 +13,7 @@ export const useConfigStore = defineStore('config', {
         getLayoutFolder: (state): string | null => state.config?.layout_folder ?? null,
         getWidgetDefinitionsFolder: (state): string | null => state.config?.widget_definitions_folder ?? null,
         getComment: (state): string[] | null => state.config?.comment ?? null,
+        getRenderFile: (state): string | null => state.config?.render_file ?? null,
     },
   
     actions: {
@@ -26,6 +27,18 @@ export const useConfigStore = defineStore('config', {
             throw new Error('Error parsing config file')
         }
         this.config = result.data
+      },
+
+      setRenderFile(renderFile: string) {
+        if (this.config) {
+          if (renderFile) {
+            this.config.render_file = renderFile;
+          } else {
+            console.error('Render file is not provided - hence no setting the render-file value')
+          }
+        } else {
+          console.error('Config object is not initialized yet - hence no setting the render-file value')
+        }
       },
     },
   })

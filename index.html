@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>boardkit</title>
     <script type="module">
-      window.location.replace(`${import.meta.env.BASE_URL}dashboard/`)
+      // [obsolete] window.location.replace(`${import.meta.env.BASE_URL}dashboard/`)
+      // the queryString parameter is used to pass the config file to the dashboard... 
+
+      // [note] kind of a way to control which config file to render...
+      window.location.replace(`${import.meta.env.BASE_URL}dashboard/dashboard-render-demo?config-file=default`)
     </script>
   </head>
   <body>

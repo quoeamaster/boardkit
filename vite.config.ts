@@ -171,6 +171,7 @@ export default defineConfig({
       // this allows us to use @ in src/dashboard
       '@': fileURLToPath(new URL('./src/dashboard', import.meta.url)),
       '@admin': fileURLToPath(new URL('./src/admin', import.meta.url)),
+      '@shared': fileURLToPath(new URL('./src/shared', import.meta.url)),
     },
   },
   server: {

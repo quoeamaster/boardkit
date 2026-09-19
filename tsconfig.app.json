@@ -8,7 +8,8 @@
       // alias for the dashboard app
       // this allows us to use @ in src/dashboard
       "@/*": ["./src/dashboard/*"],
-      "@admin/*": ["./src/admin/*"]
+      "@admin/*": ["./src/admin/*"],
+      "@shared/*": ["./src/shared/*"]
     },
 
     /* Linting */

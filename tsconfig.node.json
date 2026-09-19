@@ -18,7 +18,8 @@
 
     "paths": {
       "@/*": ["./src/dashboard/*"],
-      "@admin/*": ["./src/admin/*"]
+      "@admin/*": ["./src/admin/*"],
+      "@shared/*": ["./src/shared/*"]
     },
 
     /* Linting */
