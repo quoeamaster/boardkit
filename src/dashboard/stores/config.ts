@@ -1,19 +1,27 @@
 import { defineStore } from 'pinia'
 import type { Config } from '@/models/config/config'
-import { ConfigSchema } from '@/models/config/config'
+import { ConfigSchema, layoutFileUrl } from '@/models/config/config'
 
 export const useConfigStore = defineStore('config', {
     state: () => ({
       // config file contents
       config: null as Config | null,
+      currentLayout: null as string | null,
     }),
 
     getters: {
         getConfig: (state): Config | null => state.config,
         getLayoutFolder: (state): string | null => state.config?.layout_folder ?? null,
+        getLayouts: (state): string[] => state.config?.layouts ?? [],
+        getCurrentLayout: (state): string | null => state.currentLayout,
+        getCurrentLayoutUrl: (state): string | null => {
+            if (!state.config || !state.currentLayout) {
+                return null
+            }
+            return layoutFileUrl(state.config.layout_folder, state.currentLayout)
+        },
         getWidgetDefinitionsFolder: (state): string | null => state.config?.widget_definitions_folder ?? null,
         getComment: (state): string[] | null => state.config?.comment ?? null,
-        getRenderFile: (state): string | null => state.config?.render_file ?? null,
     },
   
     actions: {
@@ -27,18 +35,15 @@ export const useConfigStore = defineStore('config', {
             throw new Error('Error parsing config file')
         }
         this.config = result.data
+        this.currentLayout = result.data.layouts[0]
       },
 
-      setRenderFile(renderFile: string) {
-        if (this.config) {
-          if (renderFile) {
-            this.config.render_file = renderFile;
-          } else {
-            console.error('Render file is not provided - hence no setting the render-file value')
-          }
-        } else {
-          console.error('Config object is not initialized yet - hence no setting the render-file value')
+      selectLayout(filename: string) {
+        if (!this.config?.layouts.includes(filename)) {
+            console.error('Layout is not listed in config:', filename)
+            return
         }
+        this.currentLayout = filename
       },
     },
   })

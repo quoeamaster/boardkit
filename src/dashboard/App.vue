@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import BoardBadge from '@/components/board/BoardBadge.vue'
 import BoardNotficationDrawer from '@/components/board/BoardNotficationDrawer.vue'
+import { useConfigStore } from '@/stores/config'
+
+const configStore = useConfigStore()
+
+function layoutLabel(filename: string) {
+  return filename.replace(/\.json$/, '')
+}
 </script>
 
 <template>
@@ -16,32 +23,21 @@ import BoardNotficationDrawer from '@/components/board/BoardNotficationDrawer.vu
     >
       <div class="flex justify-between items-center gap-4">
         <div class="flex gap-4">
-        <!-- [note] as there is a breaking change in the BoardBarChart component, hence not showing this tab for the moment -->
-        <!-- RouterLink to="/dashboard">
-          Dashboard
-        </RouterLink -->
-        <RouterLink to="/dashboard-render-demo">
-          Dashboard Render Demo
-        </RouterLink>
-
-        <RouterLink to="/themes-demo">
-          Themes Demo
-        </RouterLink>
-
-        <RouterLink to="/components-demo">
-          Components Demo
-        </RouterLink>
+          <button
+            v-for="layout in configStore.getLayouts"
+            :key="layout"
+            type="button"
+            class="hover:underline"
+            :class="{ 'font-semibold': layout === configStore.getCurrentLayout }"
+            @click="configStore.selectLayout(layout)"
+          >
+            {{ layoutLabel(layout) }}
+          </button>
         </div>
 
         <!-- Right side: Icons -->
         <div class="flex items-center gap-3">
-          <!-- Place your icon components or SVGs here -->
-          <!-- button class="p-1 hover:bg-gray-100 rounded">🔍</button>
-          <button class="p-1 hover:bg-gray-100 rounded">⚙️</button -->
-
           <BoardBadge badgeGlyph="🔔" />
-          <!-- {{ notificationStore.getIsDrawerOpen }} - {{ notificationStore.getItemsCount }} -->
-
         </div>        
       </div>
     </nav>

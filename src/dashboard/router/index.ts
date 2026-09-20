@@ -7,7 +7,8 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/dashboard-render-demo',
+      name: 'dashboard',
+      component: () => import('@/views/DashboardRenderDemo.vue'),
     },
     {
       path: '/dashboard',
@@ -25,19 +26,6 @@ const router = createRouter({
       path: '/components-demo',
       component: () => import('@/views/ComponentsDemo.vue'),
     },
-    {
-      path: '/dashboard-render-demo',
-      component: () => import('@/views/DashboardRenderDemo.vue'),
-    },
-
-    // {
-    //   path: '/components',
-    //   component: () => import('@/views/ComponentsView.vue'),
-    // },
-    // {
-    //   path: '/themes',
-    //   component: () => import('@/views/ThemesView.vue'),
-    // },
   ],
 });
 

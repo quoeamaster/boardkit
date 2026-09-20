@@ -1,10 +1,10 @@
 {
     "layout_folder": "/app/layouts/",
-    
-
+    "layouts": ["default.json", "multi_dashboard.json"],
 
     "comment": [
         "layout_folder : folder containing the layout files (e.g. default.json, multi_dashboard.json) Depends on the project, vite is relative to /public, web server could be absolute path accessible by the server)",
+        "layouts : filenames in layout_folder. The app builds nav links from this list and fetches the chosen file on click.",
         "widget_definitions_folder : [optional] folder containing the widget definitions. If provided will use the given path to look for widget definitions. If not provided, will use `layout_folder's` value + `chosen layout name' to lookup instead.",
 
         "sample => \"widget_definition_folder\": \"/app/default/\","
